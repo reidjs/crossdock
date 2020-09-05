@@ -37,7 +37,7 @@ const IndexPage = () => {
   return (
   <Layout>
     <SEO title="Home" />
-    <h1>Crossdock</h1>
+    <h1 className="container mt-4">Crossdock!</h1>
     <div style={{width: '400px', height: '400px'}}>
       <MapContainer />
     </div>
