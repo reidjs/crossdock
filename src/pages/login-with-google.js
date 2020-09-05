@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import useFirebase from '../useFirebase';
 import fb from 'firebase/app';
 import { navigate } from "gatsby"
+const  { NODE_ENV } = process.env
 
 // If logged in, push to index, otherwise to login w/ google
 const LoginWithGoogle = () => {
@@ -16,16 +17,16 @@ const LoginWithGoogle = () => {
         provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
         return fb.auth().signInWithRedirect(provider).then(function(result) {
           console.log(result)
-          return navigate("http://localhost:8000/")
+          return navigate(NODE_ENV == 'production' ? "https://crossdock.me" : "http://localhost:8000/")
         })
       } else {
-        return navigate("http://localhost:8000/")
+        // return navigate("http://localhost:8000/")
       }
       // console.log(foo)
     });
    }, [firebase]);
   return (
-    <h1>Logging you in...</h1>
+    <h1>Logging you in with google...</h1>
   )
 }
 
