@@ -1,0 +1,59 @@
+.btnwrap {
+  font: 112.5%/1.45em sans-serif;
+font-weight: 400;
+font-kerning: normal;
+font-feature-settings: "kern","liga","clig","calt";
+font-family: Helvetica,Arial,sans-serif;
+-webkit-font-smoothing: antialiased;
+text-align: left !important;
+box-sizing: inherit;
+background-color: transparent;
+text-decoration: none;
+color: inherit;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.btn {
+  font-kerning: normal;
+font-feature-settings: "kern","liga","clig","calt";
+-webkit-font-smoothing: antialiased;
+box-sizing: inherit;
+font: inherit;
+margin: 0;
+overflow: visible;
+text-transform: none;
+background: none;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+outline: none;
+display: inline-block !important;
+vertical-align: middle !important;
+border-radius: 5px !important;
+cursor: pointer !important;
+text-align: center !important;
+border: none !important;
+padding: 0 !important;
+transition: box-shadow 300ms ease, background-color 300ms ease, -ms-transform 300ms ease, -webkit-transform 300ms ease, transform 300ms ease !important;
+box-shadow: none !important;
+margin-right: 0 !important;
+background-color: #FF7C7C !important;
+color: #FFF !important;
+}
+.btntxt {
+  font-kerning: normal;
+font-feature-settings: "kern","liga","clig","calt";
+-webkit-font-smoothing: antialiased;
+font: inherit;
+text-transform: none;
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+cursor: pointer !important;
+text-align: center !important;
+box-sizing: inherit;
+font-family: "GT-America-Standard-Medium" !important;
+color: #FFF !important;
+letter-spacing: 0 !important;
+margin: 0 !important;
+font-weight: normal !important;
+font-style: normal !important;
+padding: 0px 12px !important;
+font-size: 14px !important;
+line-height: 40px !important;
+}

@@ -2,16 +2,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import s from './header.module.css'
-
-const FancyButton = ({ text }) => {
-  return (
-    <a className={s.btnwrap}>
-      <button className={s.btn}>
-        <span className={s.btntxt}>{text}</span>
-      </button>
-    </a>
-  )
-}
+import FancyButton from '../components/fancy-button'
 
 const Header = ({ siteTitle }) => (
   <header className={`${s.header} p-4 flex justify-between items-center`}>
