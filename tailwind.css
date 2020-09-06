@@ -3,3 +3,11 @@
 @tailwind components;
 
 @tailwind utilities;
+
+@layer utilities {
+  @reponsive {
+    .ml-half {
+      margin-left: 50%;
+    }
+  }
+}
