@@ -6,11 +6,12 @@ import SEO from "../components/seo"
 import FancyButton from "../components/fancy-button" 
 import s from './index.module.css'
 import hero from '../images/hero2.jpg'
+import vid from '../images/vid.mp4'
 const IndexPage = () => {
   return (
   <Layout>
     <SEO title="Home" />
-    <section className={`flex relative min-w-full min-h-full flex-col justify-center container md:text-white text-shadow overflow-hidden w-full min-h-screen`}>
+    <section className={`hero flex relative min-w-full min-h-full flex-col justify-center container md:text-white text-shadow overflow-hidden w-full min-h-screen`}>
       <div className={`p-16 w-full md:w-1/2`}>
         <h1 className={`text-6xl mb-10 font-semibold`}>The New Way Forward</h1>
         <p className={`text-2xl mb-2`}>Your business is evolving. Shouldn't your freight forwarder?</p>
@@ -37,8 +38,8 @@ const IndexPage = () => {
         </ul>
       </div>
     </section>
-    <section className={`relative justify-center flex-col flex min-w-full items-center`}>
-      <video className={`relative md:absolute min-w-full md:min-h-screen`} preload="auto" loop autoplay style={{width: "auto", 'z-index': '-1', height: "100%"}}><source src="//videos.ctfassets.net/92fo1e671z6m/3Ai6q6SxhwGS6PXVfl0xqY/4844c7d1b05de3e19ce480b7dc8f731c/01_home_video.mp4" type="video/mp4"/></video>
+    <section className={`relative hero justify-center flex-col flex min-w-full items-center`}>
+      <video className={`relative md:absolute max-h-full min-w-full md:min-h-screen`}style={{width: "100%", 'z-index': '-1'}} loop autoPlay muted ><source src={vid} type="video/mp4"/></video>
       <div className={`z-10 md:text-white flex flex-col ml-half sm:ml-0 p-16`}>
         <h1 className={`text-6xl mb-10 font-semibold text-shadow`}>We Are the Operating System for Global Trade</h1>
         <p className={`text-2xl mb-2 text-shadow`}>Technology. Infrastructure. Expertise.</p>

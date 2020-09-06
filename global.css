@@ -1,8 +1,11 @@
 main {
-  max-width: 1280px;
+  /* max-width: 1280px; */
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+}
+section.hero {
+  min-height: 900px;
 }
 .-z-1 {
   z-index: -1
