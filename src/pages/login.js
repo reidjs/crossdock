@@ -25,6 +25,7 @@ class Login extends React.Component {
             <input onChange={(e) => this.handleChange('email', e.target.value)} type="email"/>
             <label className={`font-bold`}>Password</label>
             <input onChange={(e) => this.handleChange('password', e.target.value)} type="password" />
+            <small>At least 6 characters</small>
           </div>
           {/* <button onClick={this.submit}>Sign in to CrossDock</button> */}
           <div className={`mb-5`}>
