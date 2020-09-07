@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import image from "../images/cargoship.png"
 import SEO from "../components/seo" 
-import FancyButton from "../components/fancy-button" 
+import { FancyButton } from "../components/fancy-button" 
 import s from './index.module.css'
 import hero from '../images/hero2.jpg'
 import vid from '../images/vid.mp4'
@@ -39,7 +39,7 @@ const IndexPage = () => {
       </div>
     </section>
     <section className={`relative hero justify-center flex-col flex min-w-full items-center`}>
-      <video className={`relative md:absolute max-h-full min-w-full md:min-h-screen`}style={{width: "100%", 'z-index': '-1'}} loop autoPlay muted ><source src={vid} type="video/mp4"/></video>
+      <video className={`relative md:absolute max-h-full min-w-full md:min-h-screen`}style={{width: "100%", zIndex: '-1'}} loop autoPlay muted playsInline><source src={vid} type="video/mp4"/></video>
       <div className={`z-10 md:text-white flex flex-col ml-half sm:ml-0 p-16`}>
         <h1 className={`text-6xl mb-10 font-semibold text-shadow`}>We Are the Operating System for Global Trade</h1>
         <p className={`text-2xl mb-2 text-shadow`}>Technology. Infrastructure. Expertise.</p>

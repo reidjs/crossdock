@@ -2,7 +2,7 @@ import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
 import s from './header.module.css'
-import FancyButton from '../components/fancy-button'
+import { FancyButton } from '../components/fancy-button'
 import Svg from '../components/svg'
 
 const Header = ({ siteTitle }) => (
@@ -23,7 +23,7 @@ const Header = ({ siteTitle }) => (
       <div className={`${s.right} flex m-0`}>
         <ul className={`flex items-center m-0`}>
           <li><Svg className={`w-4 h-4 mr-8`} html={`<title>ionicons-v5-f</title><path d="M221.09,64A157.09,157.09,0,1,0,378.18,221.09,157.1,157.1,0,0,0,221.09,64Z" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:32px"/><line x1="338.29" y1="338.29" x2="448" y2="448" style="fill:none;stroke:#000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px"/>`}></Svg></li>
-          <li><Link className={`mr-4`} to="">Sign In</Link></li>
+          <li><Link className={`mr-4`} to="/login">Sign In</Link></li>
           <li><FancyButton text="Get Started" /></li>
         </ul>
       </div>
