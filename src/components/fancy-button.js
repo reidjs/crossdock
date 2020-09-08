@@ -34,7 +34,7 @@ const LoginButton = (props) => {
     <button {...props} className={s.gbtn} href="" tabIndex="" type="button">
     <span className={s.gLogo}>
       </span>
-      Sign in to CrossDock
+      {props.text}
     </button>
   )
 }

@@ -1,8 +1,11 @@
-import React, { createContext, useReducer } from 'react';
-const FirebaseCtx = createContext()
+import React, { createContext, useReducer, useEffect } from 'react';
+import firebase from 'firebase/app';
+import useFirebase from './src/useFirebase';
+import { StoreCtx } from './src/store-ctx'
 const initialState = {
   loggedIn: false,
-  firstName: '', 
+  firstName: '',
+  firebase: null
 }
 
 
@@ -13,6 +16,9 @@ function storeReducer(state, action) {
     case 'CHANGE_LOGIN':
       s.loggedIn = !s.loggedIn
       return s
+    case 'SET_FIREBASE':
+      s.firebase = action.firebase
+      return s
     default:
       return s
   }
@@ -20,12 +26,17 @@ function storeReducer(state, action) {
 
 export default function RootLayout({ children }) {
   const [state, dispatch] = useReducer(storeReducer, initialState);
+  const fbHook = useFirebase();
 
+  useEffect(() => {
+    if (!fbHook) return;
+    return dispatch({ type: 'SET_FIREBASE', firebase })
+   }, [fbHook]);
   return (
     <>
-      <FirebaseCtx.Provider value={{state, dispatch}}>
+      <StoreCtx.Provider value={{state, dispatch}}>
         {children}
-      </FirebaseCtx.Provider>
+      </StoreCtx.Provider>
     </>
   );
 }

@@ -17,8 +17,8 @@ const Header = ({ siteTitle }) => (
     <div className="hidden md:flex items-center">
       <ul className={`flex my-0 mr-24`}>
         <li className={`px-2`}><Link to="/">Why CrossDock</Link></li>
-        <li className={`px-2`}><Link>Services</Link></li>
-        <li className={`px-2`}><Link>Resources</Link></li>
+        <li className={`px-2`}><Link to="/">Services</Link></li>
+        <li className={`px-2`}><Link to="/">Resources</Link></li>
       </ul>
       <div className={`${s.right} flex m-0`}>
         <ul className={`flex items-center m-0`}>
