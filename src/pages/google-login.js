@@ -5,7 +5,7 @@ import { navigate, Link } from "gatsby"
 const  { NODE_ENV } = process.env
 
 // If logged in, push to index, otherwise to login w/ google
-const LoginWithGoogle = () => {
+const GoogleLogin = () => {
   const firebase = useFirebase();
   const pushToIndexPage = () => {
     return navigate(NODE_ENV == 'production' ? "https://crossdock.me" : "http://localhost:8000/")
@@ -37,4 +37,4 @@ const LoginWithGoogle = () => {
   )
 }
 
-export default LoginWithGoogle
+export default GoogleLogin

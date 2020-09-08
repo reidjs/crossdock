@@ -5,7 +5,8 @@ import { StoreCtx } from './src/store-ctx'
 const initialState = {
   loggedIn: false,
   firstName: '',
-  firebase: null
+  firebase: null,
+  user: {}
 }
 
 
@@ -15,6 +16,9 @@ function storeReducer(state, action) {
   switch(action.type) {
     case 'CHANGE_LOGIN':
       s.loggedIn = !s.loggedIn
+      return s
+    case 'SET_USER':
+      s.user = action.user
       return s
     case 'SET_FIREBASE':
       s.firebase = action.firebase
@@ -30,8 +34,13 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     if (!fbHook) return;
-    return dispatch({ type: 'SET_FIREBASE', firebase })
+    fbHook.auth().onAuthStateChanged((user) => {
+      dispatch({ type: 'SET_USER', user })
+    })
+    dispatch({ type: 'SET_FIREBASE', firebase })
    }, [fbHook]);
+   // put authed user in state
+
   return (
     <>
       <StoreCtx.Provider value={{state, dispatch}}>

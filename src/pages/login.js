@@ -30,13 +30,14 @@ class Login extends React.Component {
     e.preventDefault()
     this.authUser(store.state.firebase.auth(), this.state.email, this.state.password)
     store.dispatch({ type: 'CHANGE_LOGIN'})
+    // if successful, push to integrations, can watch auth and push on change
   }
   toggleCopy = () => {
     const copy = this.state.copy === 0 ? 1 : 0
     this.setState({ copy })
   }
   render() {
-    console.log('this.context', this.context)
+    // console.log('this.context', this.context)
     return (
       <StoreCtx.Consumer>
         {store => {
@@ -46,9 +47,9 @@ class Login extends React.Component {
                 <h1 className={`text-4xl mb-8`}>Sign in to CrossDock</h1>
                 <div className={`flex flex-col mb-6`}>
                   <label className={`font-bold`}>Email</label>
-                  <input onChange={(e) => this.handleChange('email', e.target.value)} type="email" />
+                  <input className={`p-3 my-2 nice-border`} onChange={(e) => this.handleChange('email', e.target.value)} type="email" />
                   <label className={`font-bold`}>Password</label>
-                  <input onChange={(e) => this.handleChange('password', e.target.value)} type="password" />
+                  <input className={`p-3 my-2 nice-border`} onChange={(e) => this.handleChange('password', e.target.value)} type="password" />
                   <small>At least 6 characters</small>
                 </div>
                 {/* <button onClick={this.submit}>Sign in to CrossDock</button> */}

@@ -67,7 +67,7 @@ const Integrations = () => {
         </div>
       </div> :
       <div>
-        <Link to="/login-with-google/">Login with Google</Link> <br />
+        <Link to="/google-login/">Login with Google</Link> <br />
         <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
         <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password"/> <br />
         <button onClick={() => createUser(fb.auth(), email, password)}>Login with email &amp; password</button>

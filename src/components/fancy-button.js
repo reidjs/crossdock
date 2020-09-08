@@ -14,6 +14,7 @@ const FancyButton = ({ text }) => {
 
 const GoogleButton = () => {
   return (
+    <Link to="/google-login">
     <button className={s.gbtn} href="" tabIndex="" type="button">
       <span className={s.gLogo}>
         <span className={s.icon}>
@@ -26,13 +27,14 @@ const GoogleButton = () => {
       </span>
       Sign in with Google
     </button>
+    </Link>
   )
 }
 
 const LoginButton = (props) => {
   return (
-    <button {...props} className={s.gbtn} href="" tabIndex="" type="button">
-    <span className={s.gLogo}>
+    <button {...props} className={`${s.bg} bg-blue-700 text-white`} href="" tabIndex="" type="button">
+    <span className={`${s.gLogo}`}>
       </span>
       {props.text}
     </button>

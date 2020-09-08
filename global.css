@@ -14,6 +14,10 @@ section.hero {
   min-height: 50vh;
 }
 
+.nice-border {
+  border: 1px solid #999
+}
+
 
 @media (min-width: 768px) { 
   .ml-half {

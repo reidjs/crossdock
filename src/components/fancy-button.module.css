@@ -149,3 +149,22 @@ width: 24px;
 height: 24px;
 }
 
+.bg {
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  position: relative;
+  font-size: 18px;
+  line-height: 1.111em;
+  letter-spacing: 0.13px;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 1px solid #FA5959;
+  border-radius: 5px;
+  padding: 14px 50px 14px 50px;
+  display: inline-block;
+  /* color: #265DF1; */
+  /* background: #FFFFFF; */
+  border-color: #265DF1;
+  width: 100%;
+  text-align: center;
+}
