@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getFirebase from './firebase'; // import our getFirebase function
+import getFirebase from './firebase';
 
 export default function useFirebase() {
   const [instance, setInstance] = useState(null);

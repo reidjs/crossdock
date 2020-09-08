@@ -1,12 +1,12 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import firebase from 'firebase/app';
 import useFirebase from './src/useFirebase';
-import { StoreCtx } from './src/store-ctx'
+import { StoreCtx, DispatchCtx } from './src/store-ctx'
 const initialState = {
   loggedIn: false,
   firstName: '',
   firebase: null,
-  user: {}
+  user: null
 }
 
 
@@ -19,6 +19,9 @@ function storeReducer(state, action) {
       return s
     case 'SET_USER':
       s.user = action.user
+      return s
+    case 'LOGOUT_USER':
+      s.user = null
       return s
     case 'SET_FIREBASE':
       s.firebase = action.firebase
@@ -43,8 +46,10 @@ export default function RootLayout({ children }) {
 
   return (
     <>
-      <StoreCtx.Provider value={{state, dispatch}}>
-        {children}
+      <StoreCtx.Provider value={state}>
+        <DispatchCtx.Provider value={dispatch}>
+          {children}
+        </DispatchCtx.Provider>
       </StoreCtx.Provider>
     </>
   );
