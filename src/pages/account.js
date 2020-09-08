@@ -11,7 +11,6 @@ const Account = () => {
   // useStore()
   const store = useContext(StoreCtx)
   const dispatch = useContext(DispatchCtx)
-  console.log('store.state', store)
   const logout = () => {
     store.firebase.auth().signOut().then(res => {
       console.log('res', res)
@@ -23,10 +22,10 @@ const Account = () => {
   //   navigate('/login')
   // }
   return (
-    <div>
+    <Layout>
       <h1>Your Account</h1>
       <button onClick={logout}>Log Out</button>
-    </div>
+    </Layout>
   )
 }
 

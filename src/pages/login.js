@@ -38,7 +38,7 @@ const Login = () => {
     dispatch({ type: 'CHANGE_LOGIN'})
     // if successful, push to integrations, can watch auth and push on change
   }
-  if (store.user) {
+  if (store && store.user) {
     navigate('/account')
   }
   return (
