@@ -13,7 +13,7 @@ const IndexPage = () => {
     <SEO title="Home" />
     <section className={`hero flex relative min-w-full min-h-full flex-col justify-center container md:text-white text-shadow overflow-hidden w-full min-h-screen`}>
       <div className={`p-16 w-full md:w-1/2`}>
-        <h1 className={`text-6xl mb-10 font-semibold`}>The New Way Forward</h1>
+        <h1 className={`text-3xl md:text-6xl mb-10 font-semibold`}>The New Way Forward</h1>
         <p className={`text-2xl mb-2`}>Your business is evolving. Shouldn't your freight forwarder?</p>
         <p className={`text-lg font-light mb-8`}>Say goodbye to the black box of freight forwarding. Only Flexport delivers deep visibility and control, low and predictable supply chain costs, with faster and more reliable transit times. All from a powerful technology platform.</p>
         <FancyButton text="Get Started" />
@@ -40,8 +40,8 @@ const IndexPage = () => {
     </section>
     <section className={`relative hero justify-center flex-col flex min-w-full items-center`}>
       <video className={`relative md:absolute max-h-full min-w-full md:min-h-screen`}style={{width: "100%", zIndex: '-1'}} loop autoPlay muted playsInline><source src={vid} type="video/mp4"/></video>
-      <div className={`z-10 md:text-white flex flex-col ml-half sm:ml-0 p-16`}>
-        <h1 className={`text-6xl mb-10 font-semibold text-shadow`}>We Are the Operating System for Global Trade</h1>
+      <div className={`z-10 md:text-white flex flex-col ml-half sm:ml-0 pr-16`}>
+        <h1 className={`text-3xl md:text-4xl lg:text-6xl mb-10 font-semibold text-shadow`}>We Are the Operating System for Global Trade</h1>
         <p className={`text-2xl mb-2 text-shadow`}>Technology. Infrastructure. Expertise.</p>
         <p className={`text-lg font-light mb-8 text-shadow`}>It takes more than dashboards or digital marketplaces to be a true freight forwarding partner. </p>
         <FancyButton text="Learn More"/>

@@ -62,8 +62,8 @@ const Account = () => {
       const d = store.firebase.database().ref('users/' + store.user.userId)
       setDbUser(d)
       syncLocalWithDb(d)
-      const email = store.user.email
-      handleChange('email', email)
+      // const email = store.user.email
+      // handleChange('email', email)
       // console.log('d', d)
       // (async () => {
       // })
