@@ -5,7 +5,7 @@ import image from "../images/cargoship.png"
 import SEO from "../components/seo" 
 import { FancyButton } from "../components/fancy-button" 
 import s from './index.module.css'
-import hero from '../images/hero2.jpg'
+import hero from '../images/hero3.jpg'
 import vid from '../images/vid.mp4'
 const IndexPage = () => {
   return (

@@ -52,30 +52,32 @@ const Integrations = () => {
   return (
   <Layout>
     <SEO title="Home" />
-    <h1 className="container mt-4">Crossdock!</h1>
-    <div style={{width: '400px', height: '400px'}}>
+    {/* <h1 className="container mt-4">Crossdock!</h1> */}
+    <div className="w-full">
       <MapContainer />
     </div>
-    { user ?
-      <div>
-        <button onClick={logout}>logout</button>
-        <div>
-          <h2>Edit Profile</h2>
-          <input placeholder="key" onChange={(e) => setKey(e.target.value)}></input>
-          <input placeholder="value" onChange={(e) => setVal(e.target.value)}></input>
-          <button onClick={() => editUser(fb.database(), user.uid, kvpair)}>Submit</button>
-        </div>
-      </div> :
-      <div>
-        <Link to="/google-login/">Login with Google</Link> <br />
-        <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password"/> <br />
-        <button onClick={() => createUser(fb.auth(), email, password)}>Login with email &amp; password</button>
-        {/* <button onClick={}>Register with email &amp; password</button> */}
-      </div>
-    } 
+    
     <br />
   </Layout>
 )}
 
 export default Integrations
+
+// { user ?
+//   <div>
+//     <button onClick={logout}>logout</button>
+//     <div>
+//       <h2>Edit Profile</h2>
+//       <input placeholder="key" onChange={(e) => setKey(e.target.value)}></input>
+//       <input placeholder="value" onChange={(e) => setVal(e.target.value)}></input>
+//       <button onClick={() => editUser(fb.database(), user.uid, kvpair)}>Submit</button>
+//     </div>
+//   </div> :
+//   <div>
+//     <Link to="/google-login/">Login with Google</Link> <br />
+//     <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"/>
+//     <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password"/> <br />
+//     <button onClick={() => createUser(fb.auth(), email, password)}>Login with email &amp; password</button>
+//     {/* <button onClick={}>Register with email &amp; password</button> */}
+//   </div>
+// } 

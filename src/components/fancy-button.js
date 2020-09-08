@@ -2,11 +2,11 @@ import React from "react"
 import s from './fancy-button.module.css'
 import { Link } from 'gatsby'
 import Svg from './svg'
-const FancyButton = ({ text }) => {
+const FancyButton = (props) => {
   return (
     <Link to="/integrations" className={s.btnwrap}>
-      <button className={s.btn}>
-        <span className={s.btntxt}>{text}</span>
+      <button {...props} className={s.btn}>
+        <span className={s.btntxt}>{props.text}</span>
       </button>
     </Link>
   )
