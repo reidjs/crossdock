@@ -37,7 +37,22 @@ const Integrations = () => {
   const [val, setVal] = useState(null)
   const [password, setPassword] = useState('')
   const firebase = useFirebase();
-  const position = [51.505, -0.09];
+  const [position, setPosition] = useState([51.505, -0.09]);
+
+  if (typeof window !== 'undefined' && window.navigator) {
+    function displayLocationInfo(position) {
+      const lng = position.coords.longitude;
+      const lat = position.coords.latitude;
+      setPosition([+lat, +lng])
+    
+      console.log(`longitude: ${ lng } | latitude: ${ lat }`);
+    }
+    if (window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(displayLocationInfo);
+    }
+    
+    // console.log('navigator', navigator)
+  }
   let kvpair = {};
   useEffect(() => {
     if (!firebase) return;
@@ -54,7 +69,7 @@ const Integrations = () => {
     <SEO title="Home" />
     {/* <h1 className="container mt-4">Crossdock!</h1> */}
     <div className="w-full">
-      <MapContainer />
+      <MapContainer center={position}/>
     </div>
     
     <br />
