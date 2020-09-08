@@ -21,8 +21,8 @@ const Header = ({ siteTitle }) => (
               </Link>
             </h1>
           </div>
-          <div className="hidden md:flex items-center">
-            <ul className={`flex my-0 mr-24`}>
+          <div className="flex items-center">
+            <ul className={`flex hidden md:flex my-0 mr-24`}>
               <li className={`px-2`}><Link to="/">Why CrossDock</Link></li>
               <li className={`px-2`}><Link to="/">Services</Link></li>
               <li className={`px-2`}><Link to="/">Resources</Link></li>
@@ -36,13 +36,15 @@ const Header = ({ siteTitle }) => (
               </ul>
             </div>
           </div>
-          <div className="md:hidden block">
+          {/* <div className="md:hidden block"> */}
             {/* <a className={s.btnwrap}>
         <button className={s.btn}>
           <span className={s.btntxt}>Get Started</span></button>
       </a> */}
+            {/* <li><Link className={`${user ? `hidden ` : ` `}mr-4`} to="/login">Sign In</Link></li>
+            <li><Link className={`${user ? ` ` : `hidden `}mr-4`} to="/account">{username}</Link></li>
             <FancyButton text="Get Started" />
-          </div>
+          </div> */}
         </header>
       )
     }
