@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react'
 import { StoreCtx, DispatchCtx } from '../store-ctx'
 import { navigate } from 'gatsby'
 import Layout from '../components/layout'
+import firebase from 'firebase/app'
 import { FancyButton, LoginButton } from '../components/fancy-button'
 import Svg from '../components/svg'
 // import useStore from '../useStore'
@@ -20,10 +21,16 @@ const Account = () => {
   const store = useContext(StoreCtx)
   const dispatch = useContext(DispatchCtx)
   const logout = () => {
-    store.firebase.auth().signOut().then(res => {
+    firebase.auth().signOut().then(res => {
       dispatch({ type: 'LOGOUT_USER' })
       navigate('/')
     })
+    if (window && window.gapi && window.gapi.auth2) {
+      console.log('window.gapi.auth2.getAuthInstance()', window.gapi.auth2.getAuthInstance())
+      window.gapi.auth2.getAuthInstance().signOut().then(f => {
+        console.log('f', f)
+      })
+    }
   }
 
   const handleBlur = (key, value) => {
