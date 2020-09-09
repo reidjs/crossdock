@@ -68,11 +68,25 @@ function SEO({ description, lang, meta, title }) {
           name: `twitter:description`,
           content: metaDescription,
         },
+        {
+          name: "google-signin-client_id",
+          content: "1044355092273-3u80rrukpjon6ov7bjrln207hce7m5rs.apps.googleusercontent.com"
+        },
+        {
+          name: "google-signin-cookiepolicy",
+          content: "single_host_origin"
+        },
+        {
+          name: "google-signin-scope",
+          content: "profile email"
+        },
       ].concat(meta)}
     >
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
 crossorigin=""/>
+        <script src="https://apis.google.com/js/platform.js" defer></script>
+
 
       <link rel="icon" href={favicon} />
 

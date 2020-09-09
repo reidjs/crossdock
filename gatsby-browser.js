@@ -12,7 +12,7 @@ import './global.css'
 
 // https://stackoverflow.com/questions/58063372/where-to-put-context-provider-in-gatsby
 export const wrapRootElement = ({ element }) => {
-return (
-<RootLayout>{element}</RootLayout>
-)
+  return (
+    <RootLayout>{element}</RootLayout>
+  )
 } 
