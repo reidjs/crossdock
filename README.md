@@ -1,3 +1,23 @@
+```
+users: {
+  uid,
+  email,
+  name,
+  truckIds: [tid1, tid2]
+}
+trucks: {
+  tid,
+  licensePlate,
+  make,
+  model,
+}
+warehouse: {
+  wid,
+  address,
+  hours,
+}
+```
+
 tailwind breakpoints
 'sm': '640px',
 // => @media (min-width: 640px) { ... }
