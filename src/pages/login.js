@@ -1,12 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react'
-import { GoogleButton, LoginButton } from '../components/fancy-button'
+import { LoginButton } from '../components/fancy-button'
 import Layout from '../components/layout'
 import { StoreCtx, DispatchCtx } from '../store-ctx'
 import { navigate } from 'gatsby'
 import firebase from 'firebase/app';
 // import GoogleLogin from '../components/google-login'
-import fbHook from '../useFirebase'
-import { Helmet } from 'react-helmet'
+// import fbHook from '../useFirebase'
+// import { Helmet } from 'react-helmet'
 import Seo from '../components/seo'
 
 const COPY = ['Sign in to CrossDock', 'Create an Account']
@@ -46,19 +46,19 @@ const Login = () => {
         // Build Firebase credential with the Google ID token.
         const credential = firebase.auth.GoogleAuthProvider.credential(
           googleUser.getAuthResponse().id_token);
-        console.log('credential', credential)
+        // console.log('credential', credential)
         // Sign in with credential from the Google user.
         firebase.auth().signInWithCredential(credential).then(function () {
           setLoaded('pushuser')
           console.log('here!')
         }).catch(function (error) {
           // Handle Errors here.
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          // const errorCode = error.code;
+          // const errorMessage = error.message;
           // The email of the user's account used.
-          const email = error.email;
+          // const email = error.email;
           // The firebase.auth.AuthCredential type that was used.
-          const credential = error.credential;
+          // const credential = error.credential;
           console.log('error', error)
 
           // ...

@@ -3,9 +3,13 @@
 }
 
 .brand {
-  min-width: 240px;
-
+  min-width: 120;
 }
 .right {
-  min-width: 240px;
+  min-width: 240;
+}
+@media (min-width: 768px) {
+  .brand {
+    min-width: 240;
+  }
 }

@@ -14,7 +14,7 @@ const Header = ({ siteTitle }) => (
       const username = (user && user.email) ? user.email.split('@')[0] : 'User'
       return (
         <header className={`${s.header} p-4 flex justify-between items-center`}>
-          <div className={s.brand}>
+          <div className={`${s.brand}`}>
             <h1>
               <Link className={s.links} to="/">
                 {siteTitle}
