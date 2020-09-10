@@ -82,7 +82,7 @@ const FindWarehouse = () => {
           <br />
           <EditableInput text="What's your license plate #?" title="license #" />
         </div>
-        <div className={` ${step > 1 ? `w-full md:w-full` : `md:w-3/4 w-1/2`}  h-full`}>
+        <div className={` ${step > 1 ? `w-full md:w-full` : `md:w-3/4 w-1/2`} p-10`}>
           <MapContainer center={position} />
         </div>
       </div>
