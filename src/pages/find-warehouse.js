@@ -75,8 +75,16 @@ const FindWarehouse = () => {
   return (
     <Layout>
       <SEO title="Find a Warehouse" />
-      <div className="w-screen h-full">
-        <MapContainer center={position} />
+      <div className={`my-0 mx-auto w-full flex`}>
+        <div className={`w-1/4 mt-4 p-4`}>
+          <h2 className={`text-2xl mb-4`}>Your Information</h2>
+          <EditableInput text="Where are you?" title="address" />
+          <br />
+          <EditableInput text="What's your license plate #?" title="license #" />
+        </div>
+        <div className="w-3/4 h-full">
+          <MapContainer center={position} />
+        </div>
       </div>
       <div className={`${step !== 0 && `hidden `}`}>
         <div className={`p-8 container`}>
@@ -191,9 +199,9 @@ const FindWarehouse = () => {
         </div>
       </div>
       <div className={`${step !== 5 && `hidden `}`}>
-        Click here for directions to the warehouse<br/>
-        Print out your billing information<br/>
-        Contact support<br/>
+        Click here for directions to the warehouse<br />
+        Print out your billing information<br />
+        Contact support<br />
         <button onClick={() => setStep(0)} className={`w-full p-6 bg-red-500 font-bold text-2xl text-white`}>Restart</button>
       </div>
     </Layout >
