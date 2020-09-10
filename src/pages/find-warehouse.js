@@ -76,13 +76,13 @@ const FindWarehouse = () => {
     <Layout>
       <SEO title="Find a Warehouse" />
       <div className={`my-0 mx-auto w-full flex`}>
-        <div className={`w-1/4 mt-4 p-4`}>
+        <div className={`${step > 1 && `hidden`} w-1/2 md:w-1/4 mt-4 p-4`}>
           <h2 className={`text-2xl mb-4`}>Your Information</h2>
           <EditableInput text="Where are you?" title="address" />
           <br />
           <EditableInput text="What's your license plate #?" title="license #" />
         </div>
-        <div className="w-3/4 h-full">
+        <div className={` ${step > 1 ? `w-full md:w-full` : `md:w-3/4 w-1/2`}  h-full`}>
           <MapContainer center={position} />
         </div>
       </div>
