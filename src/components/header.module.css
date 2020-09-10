@@ -2,3 +2,10 @@
   border-bottom: 1px solid black;
 }
 
+.brand {
+  min-width: 240px;
+
+}
+.right {
+  min-width: 240px;
+}

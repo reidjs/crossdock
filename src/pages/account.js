@@ -5,21 +5,18 @@ import Layout from '../components/layout'
 import firebase from 'firebase/app'
 import { FancyButton, LoginButton } from '../components/fancy-button'
 import Svg from '../components/svg'
-// import useStore from '../useStore'
 
 const CheckMark = () => (
   <Svg className="w-4 h-4 inline-block" html={`<path xmlns="http://www.w3.org/2000/svg" d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:32px"/> <polyline xmlns="http://www.w3.org/2000/svg" points="352 176 217.6 336 160 272" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>`} />
 )
 
 const Account = () => {
-  // if no user then push to login page
-  // show logout
-  // useStore()
-  const [state, setState] = useState({ name: '', userId: null, dbUser: null })
+  const [state, setState] = useState({ checkmark: false, name: '', trucks: [], userId: null, dbUser: null })
   const [dbUser, setDbUser] = useState(null)
-  // const [databaseState, ]
+
   const store = useContext(StoreCtx)
   const dispatch = useContext(DispatchCtx)
+
   const logout = () => {
     firebase.auth().signOut().then(res => {
       dispatch({ type: 'LOGOUT_USER' })
@@ -33,28 +30,30 @@ const Account = () => {
     }
   }
 
-  const handleBlur = (key, value) => {
-    const obj = {}
-    obj[key] = value
-    dbUser.update(obj)
-    // dbUser.once('value').then(snapshot => {
-    //   console.log(snapshot.val())
-    // })
-
-  }
   const handleChange = (key, value) => {
     const obj = Object.assign({}, state)
     obj[key] = value
+    if (key === 'name') {
+      obj.checkmark = false
+    }
     setState(obj)
   }
 
-  const syncLocalWithDb = (d) => {
+  const handleBlur = (key, value) => {
+    const obj = {}
+    obj[key] = value
+    dbUser.update(obj).then(() => {
+      handleChange('checkmark', true)
+    })
+  }
+  
+
+  const syncUser = (d) => {
     d.once('value').then(snapshot => {
       const obj = snapshot.val() || {}
       const s = Object.assign({}, state)
       Object.keys(obj).forEach(key => {
         if (key in state && state[key] !== obj[key]) {
-          // console.log(snapshot.val())
           s[key] = obj[key]
         }
       })
@@ -62,25 +61,27 @@ const Account = () => {
     })
   }
 
+  const syncTruckArray = d => {
+    d.once('value').then(snapshot => {
+      const obj = snapshot.val() || {}
+      const s = Object.assign({}, state)
+      s.trucks = []
+      Object.keys(obj).forEach(key => {
+        s.trucks.push({key, ...obj[key]})
+      })
+      setState(s)
+    })
+  }
+
   useEffect(() => {
     if (store && store.user && !dbUser) {
-      // state.userId = store.user && store.user.uid
-      // handleChange({userId: store.user.uid})
       const db = store.firebase.database()
       const uid = store.user.uid
-      console.log('store.user', store.user)
       const user = db.ref('users/' + uid)
-      console.log('user', user)
-      // get truck IDs from user.trucks
-      // const tids = db.ref('trucks/').orderByChild('owner').equalTo(uid).on('value', s => {
-      //   console.log('s', s)
-      // })
-      // console.log('tids', tids)
-
-      // const tids = user.trucks || []
-      // const trucks = tids.map(id => db.ref('trucks/' + id))
+      const trucks = db.ref('trucks/' + uid)
       setDbUser(user)
-      syncLocalWithDb(user)
+      syncUser(user)
+      syncTruckArray(trucks)
     }
     else if (dbUser) {
       dbUser.on('value', snapshot => {
@@ -90,20 +91,15 @@ const Account = () => {
   }, [store, dbUser])
 
   const addTruck = (d) => {
-    // DOESNT WORK
-    const id = store.firebase.database().ref('trucks/').push({owner: store.user.userId})
-    console.log('id', id.key)
-    dbUser.once('value').then(snapshot => {
-      
-      // const newTruckRef = 
-      // console.log('snapshot.val()', snapshot.val())
-      // const trucks = snapshot.val().trucks || []
-      // trucks.push({ type: 'truck' })
-      // handleChange('trucks', trucks)
-      // dbUser.set(trucks)
+    const trucks = store.firebase.database().ref('trucks/' + store.user.uid)
+    const truck = trucks.push()
+    truck.set({
+      type: 'bigtruck',
+      owner: store.user.uid
     })
+
+    syncTruckArray(trucks)
   }
-  // dbUser.on('value')
   return (
     <Layout>
       <div className={`p-4`}>
@@ -120,19 +116,17 @@ const Account = () => {
               onChange={(e) => handleChange('name', e.target.value)}
               type="text"
             />
-            <p>{state.name} {state.name && <CheckMark />}</p>
+            <p>{state.name} {state.checkmark && <CheckMark />}</p>
           </div>
         </form>
         <form className={`container max-w-2xl p-8`}>
-          <h1 className={`text-4xl mb-8`}>Your Trucks</h1>
-          {/* DOESNT WORK */}
-          {state.trucks && state.trucks.length}
+          <h1 className={`text-4xl mb-8`}>Your Trucks ({state.trucks.length})</h1>
           <LoginButton onClick={addTruck} text="Add new truck" />
         </form>
-        <form className={`container max-w-2xl p-8`}>
+        {/* <form className={`container max-w-2xl p-8`}>
           <h1 className={`text-4xl mb-8`}>Your Warehouses</h1>
           <LoginButton text="Add new warehouse" />
-        </form>
+        </form> */}
         <hr />
         <FancyButton onClick={logout} text="Log Out"></FancyButton>
       </div>
