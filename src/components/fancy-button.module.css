@@ -42,6 +42,7 @@ color: #FFF !important;
 font-feature-settings: "kern","liga","clig","calt";
 -webkit-font-smoothing: antialiased;
 font: inherit;
+white-space: nowrap;
 text-transform: none;
 -webkit-tap-highlight-color: rgba(0,0,0,0);
 cursor: pointer !important;

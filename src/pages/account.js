@@ -5,13 +5,46 @@ import Layout from '../components/layout'
 import firebase from 'firebase/app'
 import { FancyButton, LoginButton } from '../components/fancy-button'
 import Svg from '../components/svg'
+import truck from '../images/truck.jpg'
 
 const CheckMark = () => (
   <Svg className="w-4 h-4 inline-block" html={`<path xmlns="http://www.w3.org/2000/svg" d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:32px"/> <polyline xmlns="http://www.w3.org/2000/svg" points="352 176 217.6 336 160 272" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>`} />
 )
 
+const TruckCard = (props) => {
+  return (
+    <div>
+      <img src={truck}/>
+      <p>{props.type}</p>
+    </div>
+  )
+}
+
+const EditableInput = (props) => {
+  const [isEditing, setEditing] = useState(false)
+  const [newText, changeText] = useState(props.text)
+  const [changed, setChanged] = useState(false)
+  // let changed = false
+  const saveText = (e) => {
+    const t = e.target.value
+    changeText(t)
+    setEditing(false)
+    props.callback && props.callback(t)
+    setChanged(true)
+  }
+
+  return (
+    <span className={`cursor-text`}>
+      <span onClick={() => setEditing(true)} className={`${isEditing && 'hidden '}`}>{changed ? newText : props.text}</span>
+      {/* <CheckMark onClick={setEditing(true)} /> */}
+      <input onBlur={saveText} className={`${!isEditing && 'hidden '} p-2 nice-border`} placeholder={changed ? newText : props.text} type="text"></input>
+    </span>
+  )
+}
+
 const Account = () => {
-  const [state, setState] = useState({ checkmark: false, name: '', trucks: [], userId: null, dbUser: null })
+  const [state, setState] = useState({ checkmark: false, trucks: [], userId: null, dbUser: null })
+  const [name, setName] = useState('')
   const [dbUser, setDbUser] = useState(null)
 
   const store = useContext(StoreCtx)
@@ -42,8 +75,12 @@ const Account = () => {
   const handleBlur = (key, value) => {
     const obj = {}
     obj[key] = value
+
     dbUser.update(obj).then(() => {
-      handleChange('checkmark', true)
+      if (key === 'name') {
+        handleChange('checkmark', true)
+        setName(value)
+      }
     })
   }
   
@@ -52,11 +89,17 @@ const Account = () => {
     d.once('value').then(snapshot => {
       const obj = snapshot.val() || {}
       const s = Object.assign({}, state)
+
       Object.keys(obj).forEach(key => {
         if (key in state && state[key] !== obj[key]) {
+          console.log('s[key], obj[key]', s[key], obj[key])
           s[key] = obj[key]
         }
       })
+      if (obj['name']) {
+        setName(obj['name'])
+      }
+      console.log('s', s)
       setState(s)
     })
   }
@@ -95,11 +138,17 @@ const Account = () => {
     const truck = trucks.push()
     truck.set({
       type: 'bigtruck',
-      owner: store.user.uid
+      owner: store.user.uid,
+      key: truck.key
     })
 
     syncTruckArray(trucks)
   }
+  const truckList = state.trucks.map((t, i) => {
+    return (
+      <li key={t.key}><TruckCard type={t.type} /></li>
+    )
+  })
   return (
     <Layout>
       <div className={`p-4`}>
@@ -109,18 +158,23 @@ const Account = () => {
             <h1 className={`text-4xl mb-8`}>About you</h1>
             <label className={`font-bold`}>Your Email</label>
             <p className={`mb-4`}>{store && store.user && store.user.email}</p>
-            <label className={`font-bold`}>Your Name</label>
-            <input
+            {/* <label className={`font-bold`}>Your Name</label> */}
+            {/* <input
               className={`p-3 my-2 nice-border`}
               onBlur={e => handleBlur('name', e.target.value)}
               onChange={(e) => handleChange('name', e.target.value)}
               type="text"
-            />
-            <p>{state.name} {state.checkmark && <CheckMark />}</p>
+            /> */}
+            {/* <p>{name} {state.checkmark && <CheckMark />}</p> */}
+            <EditableInput text={name ? name : 'Your Name'} callback={(e) => handleBlur('name', e)} />
+            <EditableInput text="Your Age" />
           </div>
         </form>
         <form className={`container max-w-2xl p-8`}>
           <h1 className={`text-4xl mb-8`}>Your Trucks ({state.trucks.length})</h1>
+          <ul>
+            {truckList}
+          </ul>
           <LoginButton onClick={addTruck} text="Add new truck" />
         </form>
         {/* <form className={`container max-w-2xl p-8`}>
