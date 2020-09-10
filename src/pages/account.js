@@ -13,9 +13,21 @@ const CheckMark = () => (
 
 const TruckCard = (props) => {
   return (
-    <div>
-      <img src={truck}/>
-      <p>{props.type}</p>
+    <div className="nice-border p-4 flex flex-col">
+      <p className={`text-right`}>
+      <span className="text-right cursor-pointer text-xl text-red-600" onClick={props.callback}>
+        &times;
+      </span>
+      </p>
+      <div className={`flex flex-col md:flex-row`}>
+        <img src={truck} className={`md:mr-4 mx-auto my-0 mb-4 md:my-0 md:ml-0`}/>
+        {/* <p>{props.type}</p> */}
+        <div className={`flex flex-col`}>
+          <EditableInput text="6RO1342, etc" title="License #"/>
+          <EditableInput text="Kenworth, Peterbilt, etc." title="Make" />
+          <EditableInput text="W900, 359, etc" title="Model" />
+        </div>
+      </div>
     </div>
   )
 }
@@ -55,7 +67,7 @@ const EditableInput = (props) => {
 }
 
 const Account = () => {
-  const [state, setState] = useState({ checkmark: false, trucks: [], userId: null, dbUser: null })
+  const [state, setState] = useState({ checkmark: false, age: '', trucks: [], userId: null, dbUser: null })
   const [name, setName] = useState('')
   const [dbUser, setDbUser] = useState(null)
 
@@ -156,9 +168,16 @@ const Account = () => {
 
     syncTruckArray(trucks)
   }
+  const deleteTruck = t => {
+    const trucks = store.firebase.database().ref('trucks/' + store.user.uid)
+    const truck = store.firebase.database().ref('trucks/' + store.user.uid + '/' + t.key)
+    truck.remove()
+    syncTruckArray(trucks)
+
+  }
   const truckList = state.trucks.map((t, i) => {
     return (
-      <li key={t.key}><TruckCard type={t.type} /></li>
+      <li key={t.key} className="my-4"><TruckCard type={t.type} callback={() => deleteTruck(t)}/></li>
     )
   })
   return (
@@ -178,12 +197,13 @@ const Account = () => {
               type="text"
             /> */}
             {/* <p>{name} {state.checkmark && <CheckMark />}</p> */}
-            <EditableInput title="Your Name" text={name ? name : 'Your Name'} callback={(e) => handleBlur('name', e)} />
-            <EditableInput title="Your Age" text="Your Age" />
+            <EditableInput title="Your Name" text={name ? name : 'What\'s your name?'} callback={(e) => handleBlur('name', e)} />
+            <EditableInput title="Your Age" text="How old are you?" />
+            <EditableInput title="Your Phone Number" text="What's your phone number?" />
           </div>
         </form>
         <form className={`container max-w-2xl p-8`}>
-          <h1 className={`text-4xl mb-8`}>Your Trucks ({state.trucks.length})</h1>
+          <h1 className={`text-4xl mb-8`}>{`Your Truck${state.trucks.length > 1 ? 's' : ''} (${state.trucks.length})`}</h1>
           <ul>
             {truckList}
           </ul>
