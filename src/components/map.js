@@ -21,7 +21,7 @@ const MapContainer = (props) => {
           />
           <Marker position={props.center}>
             <Popup>
-              A warehouse <br /> Easily customizable.
+              Your approximate location <br /> <span onClick={() => console.log('hi')}>TODO: Make this an editable input?</span>
           </Popup>
           </Marker>
         </Map>

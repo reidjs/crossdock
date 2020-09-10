@@ -7,6 +7,7 @@ import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo" 
 import MapContainer from '../components/map'
+import { FancyButton } from "../components/fancy-button";
 
 const createUser = (auth, email, password) => {
   // auth is fireb.auth()
@@ -53,24 +54,28 @@ const Integrations = () => {
     
     // console.log('navigator', navigator)
   }
+  const findWarehouse = (e) => {
+    console.log('e', e)
+  }
   let kvpair = {};
-  useEffect(() => {
-    if (!firebase) return;
-    return firebase.auth().onAuthStateChanged((user) => {
-      console.log('User:', user);
-      setUser(user)
-    })
-   }, [firebase]);
-  useEffect(() => {
-    kvpair[key] = val
-   }, [key, val]);
+  // useEffect(() => {
+  //   if (!firebase) return;
+  //   return firebase.auth().onAuthStateChanged((user) => {
+  //     console.log('User:', user);
+  //     setUser(user)
+  //   })
+  //  }, [firebase]);
+  // useEffect(() => {
+  //   kvpair[key] = val
+  //  }, [key, val]);
   return (
   <Layout>
     <SEO title="Home" />
     {/* <h1 className="container mt-4">Crossdock!</h1> */}
-    <div className="w-full">
+    <div className="w-screen h-full">
       <MapContainer center={position}/>
     </div>
+    {/* <button onClick={findWarehouse} className={`w-full p-6 bg-green-600 font-bold text-2xl text-white`}>Find Warehouse</button> */}
     
     <br />
   </Layout>
