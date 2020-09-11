@@ -1,10 +1,12 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "crossdock.me",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "GS1 Hackathon Entry",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "@reidjs on github",
   "dependencies": {
+    "@stripe/react-stripe-js": "^1.1.2",
+    "@stripe/stripe-js": "^1.9.0",
     "firebase": "^7.19.1",
     "gatsby": "^2.24.50",
     "gatsby-image": "^2.4.16",

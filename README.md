@@ -1,3 +1,9 @@
+## Development
+
+Using Stripe  
+Start PHP server  
+`php -S 127.0.0.1:4242`  
+Test with card 42424242...
 ```
 users: {
   uid,

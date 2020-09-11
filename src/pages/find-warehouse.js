@@ -99,12 +99,12 @@ const FindWarehouse = () => {
       </div>
       <div className={`${step !== 1 && `hidden `}`}>
         <div className={`min-w-full p-4 mb-8`}>
-          <h2>Warehouse Requirements</h2>
+          <h2 className={`text-2xl`}>Warehouse Requirements</h2>
           <small>Let the warehouse know what you need</small>
           <ul>
             <li>
-              <details>
-                <summary>How long do you need to dock?</summary>
+              <details open>
+                <summary>How long do you need to dock? (required)</summary>
                 <div className={`p-4`}>
                   <EditableInput title="time needed (hours, days, etc.)" text="1 hour" />
                   <br />
@@ -190,7 +190,7 @@ const FindWarehouse = () => {
       </div>
       <div className={`${step !== 4 && `hidden `}`}>
         <div className={`p-5 flex flex-col container`}>
-          <h2>Enter your billing information</h2>
+          <h2 className={`text-2xl`}>Enter your billing information</h2>
           TODO: Add square integration
         </div>
         <div className={`flex`}>
@@ -199,9 +199,12 @@ const FindWarehouse = () => {
         </div>
       </div>
       <div className={`${step !== 5 && `hidden `}`}>
-        Click here for directions to the warehouse<br />
-        Print out your billing information<br />
-        Contact support<br />
+        <h2 className={`text-2xl`}>Thank you for booking through CrossDock.</h2>
+        <ul>
+          <li>Click here for directions to the warehouse</li>
+          <li>Print out your billing information</li>
+          <li>Contact support</li>
+        </ul>
         <button onClick={() => setStep(0)} className={`w-full p-6 bg-red-500 font-bold text-2xl text-white`}>Restart</button>
       </div>
     </Layout >

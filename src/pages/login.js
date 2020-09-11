@@ -8,16 +8,19 @@ import firebase from 'firebase/app';
 // import fbHook from '../useFirebase'
 // import { Helmet } from 'react-helmet'
 import Seo from '../components/seo'
+import Spinner from '../components/spinner'
 
 const COPY = ['Sign in to CrossDock', 'Create an Account']
 const COPY2 = ['Register an Account', 'Log in to your Account']
+// Doesnt work bc component doesnt repaint in time:
+const GUESTCOPY = ['Continue as Guest', 'Logging you in...']
 
 const Login = () => {
   const [failMessage, setError] = useState('')
   const [loaded, setLoaded] = useState('')
-  const [hasMounted, setHasMounted] = React.useState(false);
-
-
+  // const [hasMounted, setHasMounted] = React.useState(false);
+  // const [guestCopyIdx, changeGuestCopy] = useState(0)
+  // let guestCopyIdx = 0
   const store = useContext(StoreCtx)
   const dispatch = useContext(DispatchCtx)
   const [state, setState] = useState({ email: '', password: '', copy: 0 })
@@ -101,10 +104,13 @@ const Login = () => {
     dispatch({ type: 'CHANGE_LOGIN' })
     // if successful, push to integrations, can watch auth and push on change
   }
-  const guestLogin = e => {
+  const guestLogin = async e => {
     e.preventDefault()
+    // await changeGuestCopy(1)
     authUser(store.firebase.auth(), 'a@b.com', '123456')
     dispatch({ type: 'CHANGE_LOGIN' })
+    // changeGuestCopy(0)
+    // guestCopyIdx
 
   }
 
@@ -163,9 +169,9 @@ const Login = () => {
   // if (store && store.user) {
   //   navigate('/account')
   // }
-  React.useEffect(() => {
-    setHasMounted(true);
-  }, []);
+  // React.useEffect(() => {
+  //   setHasMounted(true);
+  // }, []);
 
   // if (!hasMounted) {
   //   console.log('hasMounted', hasMounted)
@@ -176,7 +182,7 @@ const Login = () => {
     <Layout>
       <Seo title="Login"/>
 
-      <form className="max-w-4xl my-0 mx-auto">
+      <form className="max-w-xl my-4 mx-auto">
         <h1 className={`text-4xl mb-8`}>Sign in to CrossDock</h1>
         <div className={`flex flex-col mb-6`}>
           <label className={`font-bold`}>Email</label>
@@ -201,7 +207,8 @@ const Login = () => {
         </div>
         {/* GUEST LOGIN */}
         <div className={`mb-5`}>
-          <LoginButton onClick={guestLogin} text="Continue as Guest"></LoginButton>
+          <LoginButton onClick={guestLogin} text={GUESTCOPY[0]}></LoginButton>
+          {/* {guestCopyIdx === 1 && <Spinner />} */}
         </div>
         {/* <Helmet>
         <script src="https://apis.google.com/js/platform.js" async defer></script>

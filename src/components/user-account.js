@@ -7,6 +7,10 @@ import { FancyButton, LoginButton } from '../components/fancy-button'
 import Svg from '../components/svg'
 import truck from '../images/truck.jpg'
 import EditableInput from '../components/editable-input'
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./checkout-form";
+
 
 const CheckMark = () => (
   <Svg className="w-4 h-4 inline-block" html={`<path xmlns="http://www.w3.org/2000/svg" d="M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:32px"/> <polyline xmlns="http://www.w3.org/2000/svg" points="352 176 217.6 336 160 272" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>`} />
@@ -45,6 +49,7 @@ const UserAccount = () => {
   const store = useContext(StoreCtx)
   const dispatch = useContext(DispatchCtx)
   const numTrucks = state.trucks.length
+  const promise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
   const logout = () => {
     firebase.auth().signOut().then(res => {
@@ -194,9 +199,13 @@ const UserAccount = () => {
         </div>
       </form>
       <h1 className={`text-4xl mb-8`}>Payment Information</h1>
-      <form>
-        payments here
-      </form>
+      {/* <form> */}
+      <div className="container">
+        <Elements stripe={promise}>
+          <CheckoutForm />
+        </Elements>
+      </div>
+      {/* </form> */}
       <h1 className={`text-4xl mb-8`}>{`Your Truck${numTrucks > 1 ? 's' : ''} (${numTrucks})`}</h1>
       <form className={`container max-w-2xl p-8`}>
         <ul>
