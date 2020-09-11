@@ -1,12 +1,6 @@
 ## Development
 
-TODO: add deploy script for node server  
-(needs to restart PM2 as well!)
-
-Using Stripe  
-Start node server
-`node server.js`  
-Test with card 42424242...
+Requires crossdock-server for payment stuff
 ```
 users: {
   uid,
