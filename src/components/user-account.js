@@ -74,9 +74,9 @@ const UserAccount = () => {
   }
 
   const handleBlur = (key, value) => {
+    if (!dbUser) return
     const obj = {}
     obj[key] = value
-
     dbUser.update(obj).then(() => {
       if (key === 'name') {
         handleChange('checkmark', true)
