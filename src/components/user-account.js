@@ -54,7 +54,7 @@ const UserAccount = () => {
   const logout = () => {
     firebase.auth().signOut().then(res => {
       dispatch({ type: 'LOGOUT_USER' })
-      navigate('/')
+      // navigate('/')
     })
     if (window && window.gapi && window.gapi.auth2) {
       console.log('window.gapi.auth2.getAuthInstance()', window.gapi.auth2.getAuthInstance())
@@ -187,7 +187,7 @@ const UserAccount = () => {
   })
   return (
     <div className={`p-4`}>
-      <h1 className={`text-4xl mb-8`}>Your Account</h1>
+      <h1 className={`text-4xl my-8`}>Your Account</h1>
       <form className={`container max-w-2xl p-8`}>
         <div className={`flex flex-col mb-6`}>
           <h1 className={`text-4xl mb-8`}>About you</h1>
@@ -198,7 +198,7 @@ const UserAccount = () => {
           <EditableInput title="Your Phone Number" text="What's your phone number?" />
         </div>
       </form>
-      <h1 className={`text-4xl mb-8`}>Payment Information</h1>
+      <h1 className={`text-4xl my-8`}>Payment Information</h1>
       {/* <form> */}
       <div className="container">
         <Elements stripe={promise}>
@@ -206,7 +206,7 @@ const UserAccount = () => {
         </Elements>
       </div>
       {/* </form> */}
-      <h1 className={`text-4xl mb-8`}>{`Your Truck${numTrucks > 1 ? 's' : ''} (${numTrucks})`}</h1>
+      <h1 className={`text-4xl my-8`}>{`Your Truck${numTrucks > 1 ? 's' : ''} (${numTrucks})`}</h1>
       <form className={`container max-w-2xl p-8`}>
         <ul>
           {truckList}

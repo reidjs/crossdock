@@ -1,8 +1,11 @@
 ## Development
 
+TODO: add deploy script for node server  
+(needs to restart PM2 as well!)
+
 Using Stripe  
-Start PHP server  
-`php -S 127.0.0.1:4242`  
+Start node server
+`node server.js`  
 Test with card 42424242...
 ```
 users: {

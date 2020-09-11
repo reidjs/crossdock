@@ -12,26 +12,27 @@ export default function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
+  console.log('process.env', process.env.GATSBY_DEV_STRIPE_SERVER)
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     window
-      .fetch("http://127.0.0.1:4242/create.php", {
+      .fetch(`${process.env.GATSBY_DEV_STRIPE_SERVER || ''}/create-payment-intent`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          // "Access-Control-Request-Headers": "origin",
-          // "Access-Control-Request-Headers": "Origin",
-          // "Access-Control-Request-Method": "POST",
-          // "Origin": "http://localhost:8000"
+          "Content-Type": "application/json"
         },
-        body: JSON.stringify({ items: [{ id: "xl-tshirt" }] })
+        body: JSON.stringify({items: [{ id: "xl-tshirt" }]})
       })
       .then(res => {
+        // console.log(res.json())
         return res.json();
       })
       .then(data => {
-        console.log('data', data)
+        // console.log('data', JSON.stringify(data))
         setClientSecret(data.clientSecret);
+      })
+      .catch(err => {
+        console.error('SERVER ERROR:', err)
       });
   }, []);
   const cardStyle = {
@@ -74,7 +75,7 @@ export default function CheckoutForm() {
     }
   };
   return (
-    <form id="payment-form" onSubmit={handleSubmit}>
+    <form className={`container max-w-2xl p-8`} id="payment-form" onSubmit={handleSubmit}>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       <button
         disabled={processing || disabled || succeeded}
@@ -84,8 +85,8 @@ export default function CheckoutForm() {
           {processing ? (
             <div className="spinner" id="spinner"></div>
           ) : (
-              "Pay"
-            )}
+            "Save"
+          )}
         </span>
       </button>
       {/* Show any error that happens when processing the payment */}
