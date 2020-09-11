@@ -10,7 +10,7 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import favicon from '../images/favicon.ico'
-
+import fouc from './fouc.js'
 function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
     graphql`
@@ -32,6 +32,7 @@ function SEO({ description, lang, meta, title }) {
     <Helmet
       htmlAttributes={{
         lang,
+        class: 'no-js'
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
@@ -82,15 +83,18 @@ function SEO({ description, lang, meta, title }) {
         },
       ].concat(meta)}
     >
+      {/* <script src={fouc} type="text/javascript"></script> */}
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-crossorigin=""/>
-        <script src="https://apis.google.com/js/platform.js" defer></script>
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin="" />
+      <script src="https://apis.google.com/js/platform.js" defer></script>
 
+      <script>{`window.document.documentElement.className="js"`}</script>
 
       <link rel="icon" href={favicon} />
+    {/* <script type="text/javascript" src={`{window.document.documentElement.lastChild.className="js"}`}></script> */}
 
-      </Helmet>
+    </Helmet>
   )
 }
 

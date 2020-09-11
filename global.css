@@ -11,6 +11,16 @@ form {
   border-radius: 7px;
   padding: 40px;
 }
+.no-js {
+  visibility: hidden;
+  opacity: 0;
+}
+ 
+.js {
+  visibility: visible;
+  opacity: 1;
+}
+
 main {
   /* max-width: 1280px; */
   display: flex;
