@@ -29,11 +29,11 @@ const TruckCard = ({ type, deleteTruck, isCurrentTruck, setAsCurrentTruck }) => 
       <div className={`flex flex-col md:flex-row`}>
         <img src={truck} className={`md:mr-4 mx-auto my-0 mb-4 md:my-0 md:ml-0`} />
         {/* <p>{type}</p> */}
-        <div className={`flex flex-col`}>
-          <EditableInput text="6RO1342, etc" title="License #" />
-          <EditableInput text="Kenworth, Peterbilt, etc." title="Make" />
-          <EditableInput text="W900, 359, etc" title="Model" />
-        </div>
+        <ul className={`flex flex-col`}>
+          <li className={`mb-4`}><EditableInput text="What is the license #?" title="License #" /></li>
+          <li className={`mb-4`}><EditableInput text="What make is it?" title="Make" /></li>
+          <li className={``}><EditableInput text="What model is it?" title="Model" /></li>
+        </ul>
       </div>
     </div>
   )
@@ -191,11 +191,15 @@ const UserAccount = () => {
       <form className={`container max-w-2xl p-8`}>
         <div className={`flex flex-col mb-6`}>
           <h1 className={`text-4xl mb-8`}>About you</h1>
-          <label className={`font-bold`}>Your Email</label>
-          <p className={`mb-4`}>{store && store.user && store.user.email}</p>
-          <EditableInput title="Your Name" text={name ? name : 'What\'s your name?'} callback={(e) => handleBlur('name', e)} />
-          <EditableInput title="Your Age" text="How old are you?" />
-          <EditableInput title="Your Phone Number" text="What's your phone number?" />
+          <ul className="flex flex-col">
+            <li className="mb-4 flex flex-col">
+              <span>{store && store.user && store.user.email}</span>
+              <label className={`font-bold`}>Your Email</label>
+            </li>
+            <li className="mb-4"><EditableInput title="Your Name" text={name ? name : 'What\'s your name?'} callback={(t) => handleBlur('name', t)} /></li>
+            <li className="mb-4"><EditableInput title="Your Age" text="How old are you?" /></li>
+            <li className="mb-4"><EditableInput title="Your Phone Number" text="What's your phone number?" /></li>
+          </ul>
         </div>
       </form>
       <h1 className={`text-4xl my-8`}>Payment Information</h1>
