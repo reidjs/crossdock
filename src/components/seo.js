@@ -5,12 +5,11 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useEffect } from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 import favicon from '../images/favicon.ico'
-
 function SEO({ description, lang, meta, title }) {
   const { site } = useStaticQuery(
     graphql`
@@ -32,7 +31,7 @@ function SEO({ description, lang, meta, title }) {
     <Helmet
       htmlAttributes={{
         lang,
-        class: 'no-js'
+        // class: 'no-js'
       }}
       title={title}
       titleTemplate={`%s | ${site.siteMetadata.title}`}
@@ -89,7 +88,6 @@ function SEO({ description, lang, meta, title }) {
         crossorigin="" />
       <script src="https://apis.google.com/js/platform.js" defer></script>
 
-      <script>{`window.document.documentElement.className="js"`}</script>
 
       <link rel="icon" href={favicon} />
     {/* <script type="text/javascript" src={`{window.document.documentElement.lastChild.className="js"}`}></script> */}
@@ -98,6 +96,7 @@ function SEO({ description, lang, meta, title }) {
   )
 }
 
+{/* <script>{`window.document.documentElement.className="js"`}</script> */}
 SEO.defaultProps = {
   lang: `en`,
   meta: [],

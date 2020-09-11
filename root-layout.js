@@ -1,6 +1,7 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import useFirebase from './src/useFirebase';
+import { Helmet } from "react-helmet"
 import { StoreCtx, DispatchCtx } from './src/store-ctx'
 const initialState = {
   loggedIn: false,
@@ -34,6 +35,7 @@ function storeReducer(state, action) {
 export default function RootLayout({ children }) {
   const [state, dispatch] = useReducer(storeReducer, initialState);
   const fbHook = useFirebase();
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     if (!fbHook) return;
@@ -43,9 +45,18 @@ export default function RootLayout({ children }) {
     dispatch({ type: 'SET_FIREBASE', firebase })
    }, [fbHook]);
    // put authed user in state
+   useEffect(() => {
+     setMounted(true)
+   }, [])
 
   return (
     <>
+    <Helmet
+      htmlAttributes={{
+        class: mounted ? 'js' : 'no-js'
+      }}>
+      {/* <script>{`window.document.documentElement.className="js"`}</script> */}
+      </Helmet>
       <StoreCtx.Provider value={state}>
         <DispatchCtx.Provider value={dispatch}>
           {children}
