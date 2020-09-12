@@ -10,6 +10,7 @@ import EditableInput from '../components/editable-input'
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./checkout-form";
+const promise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 
 const CheckMark = () => (
@@ -49,7 +50,6 @@ const UserAccount = () => {
   const store = useContext(StoreCtx)
   const dispatch = useContext(DispatchCtx)
   const numTrucks = state.trucks.length
-  const promise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
   const logout = () => {
     firebase.auth().signOut().then(res => {

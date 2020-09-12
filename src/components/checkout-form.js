@@ -12,7 +12,7 @@ export default function CheckoutForm() {
   const [clientSecret, setClientSecret] = useState('');
   const stripe = useStripe();
   const elements = useElements();
-  console.log('process.env', process.env.GATSBY_DEV_STRIPE_SERVER)
+  // console.log('process.env', process.env.GATSBY_DEV_STRIPE_SERVER)
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     window
@@ -21,7 +21,7 @@ export default function CheckoutForm() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({items: [{ id: "xl-tshirt" }]})
+        body: JSON.stringify({ items: [{ id: "xl-tshirt" }] })
       })
       .then(res => {
         // console.log(res.json())
@@ -85,8 +85,8 @@ export default function CheckoutForm() {
           {processing ? (
             <div className="spinner" id="spinner"></div>
           ) : (
-            "Save"
-          )}
+              "Save"
+            )}
         </span>
       </button>
       {/* Show any error that happens when processing the payment */}

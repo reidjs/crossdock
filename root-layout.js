@@ -14,7 +14,7 @@ const initialState = {
 function storeReducer(state, action) {
   const s = Object.assign({}, state)
   console.log('state, action', state, action)
-  switch(action.type) {
+  switch (action.type) {
     case 'CHANGE_LOGIN':
       s.loggedIn = !s.loggedIn
       return s
@@ -43,19 +43,22 @@ export default function RootLayout({ children }) {
       dispatch({ type: 'SET_USER', user })
     })
     dispatch({ type: 'SET_FIREBASE', firebase })
-   }, [fbHook]);
-   // put authed user in state
-   useEffect(() => {
-     setMounted(true)
-   }, [])
+  }, [fbHook]);
+  useEffect(() => {
+    // Prevent FOUC
+    const timeout = setTimeout(() => {
+      setMounted(true)
+    }, 1000)
+    return () => clearTimeout(timeout)
+  }, [])
 
   return (
     <>
-    <Helmet
-      htmlAttributes={{
-        class: mounted ? 'js' : 'no-js'
-      }}>
-      {/* <script>{`window.document.documentElement.className="js"`}</script> */}
+      <Helmet
+        htmlAttributes={{
+          class: mounted ? 'js' : 'no-js'
+        }}>
+        {/* <script>{`window.document.documentElement.className="js"`}</script> */}
       </Helmet>
       <StoreCtx.Provider value={state}>
         <DispatchCtx.Provider value={dispatch}>
