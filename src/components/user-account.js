@@ -3,7 +3,7 @@ import { StoreCtx, DispatchCtx } from '../store-ctx'
 import { navigate } from 'gatsby'
 // import Layout from '../components/layout'
 import firebase from 'firebase/app'
-import { FancyButton, LoginButton } from '../components/fancy-button'
+import { LogoutButton, LoginButton } from '../components/fancy-button'
 import Svg from '../components/svg'
 import truck from '../images/truck.jpg'
 import EditableInput from '../components/editable-input'
@@ -186,7 +186,7 @@ const UserAccount = () => {
     )
   })
   return (
-    <div className={`p-4`}>
+    <div className={`p-4 flex flex-col items-center`}>
       <h1 className={`text-4xl my-8`}>Your Account</h1>
       <form className={`container max-w-2xl p-8`}>
         <div className={`flex flex-col mb-6`}>
@@ -211,7 +211,7 @@ const UserAccount = () => {
       </div>
       {/* </form> */}
       <h1 className={`text-4xl my-8`}>{`Your Truck${numTrucks > 1 ? 's' : ''} (${numTrucks})`}</h1>
-      <form className={`container max-w-2xl p-8`}>
+      <form className={`mb-4 container max-w-2xl p-8`}>
         <ul>
           {truckList}
         </ul>
@@ -222,7 +222,7 @@ const UserAccount = () => {
           <LoginButton text="Add new warehouse" />
         </form> */}
       <hr />
-      <FancyButton onClick={logout} text="Log Out"></FancyButton>
+      <LogoutButton onClick={logout} text="Log Out"></LogoutButton>
     </div>
   )
 }

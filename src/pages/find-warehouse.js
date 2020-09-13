@@ -139,9 +139,9 @@ const FindWarehouse = () => {
       </div>
       {/* <nav className={`px-8 justify-center`}> */}
       <details className="p-10 md:hidden">
-        <summary open>Show Steps</summary>
-        <div className="absolute">
-        {discreteSteps}
+        <summary className="cursor-pointer" open>Show Steps</summary>
+        <div className="absolute z-10">
+          {discreteSteps}
         </div>
       </details>
       <div className="px-16 justify-center w-full hidden md:flex">
@@ -201,12 +201,13 @@ const FindWarehouse = () => {
             </li>
           </ul>
         </div>
-        <div className={`flex w-full`}>
-          <button onClick={prevStep} className={`w-full p-6 bg-red-500 font-bold text-2xl text-white`}>Cancel</button>
-          <button onClick={nextStep} className={`w-full p-6 bg-green-500 font-bold text-2xl text-white`}>Go</button>
-        </div>
+
+          <div className={`w-full flex px-10 md:flex-row flex-col`}>
+            <button onClick={prevStep} className={`w-full p-6 bg-red-500 font-bold text-2xl text-white`}>Cancel</button>
+            <button onClick={nextStep} className={`w-full p-6 bg-green-500 font-bold text-2xl text-white`}>Go</button>
+          </div>
       </div>
-      <div className={`${step !== 2 ? `hidden `: `m-container `}`}>
+      <div className={`${step !== 2 ? `hidden ` : `m-container `}`}>
         <div className="flex flex-col container p-5">
           <div className="flex flex-col items-center ">
             <Spinner />
@@ -260,7 +261,7 @@ const FindWarehouse = () => {
             </Elements>
           </div>
         </div>
-        <div className={`flex w-full`}>
+        <div className={`flex w-full flex-col md:flex-row`}>
           <button onClick={() => changeStep(3)} className={`w-full p-6 bg-red-500 font-bold text-2xl text-white`}>Back to warehouses</button>
           <button onClick={nextStep} className={`w-full p-6 bg-green-500 font-bold text-2xl text-white`}>Pay &amp; Get Directions</button>
         </div>

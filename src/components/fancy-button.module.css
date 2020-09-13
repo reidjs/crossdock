@@ -41,6 +41,11 @@ s.btnwrap {
     max-width: 150px;
 }
 
+.btn.logout-btn {
+    background-color: #E53E3E;
+    width: 100%;
+}
+
 .btntxt {
     font-kerning: normal;
     font-feature-settings: "kern", "liga", "clig", "calt";

@@ -75,7 +75,7 @@ export default function CheckoutForm() {
     }
   };
   return (
-    <form className={`container max-w-2xl p-8`} id="payment-form" onSubmit={handleSubmit}>
+    <form className={`container mx-auto my-0 max-w-2xl p-8`} id="payment-form" onSubmit={handleSubmit}>
       <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
       <button
         disabled={processing || disabled || succeeded}

@@ -1,5 +1,10 @@
 ## Development
 
+TODO:
+find-warehouse page
+- Login information should show up on the first step
+- 
+
 Requires crossdock-server for payment stuff
 ```
 users: {

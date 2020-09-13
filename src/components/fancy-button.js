@@ -11,6 +11,15 @@ const FancyButton = (props) => {
     </Link>
   )
 }
+const LogoutButton = (props) => {
+  return (
+    <Link to="/" className={`${s.btnwrap}`}>
+      <button {...props} className={`${s.btn} ${s.logoutBtn}`}>
+        <span className={s.btntxt}>{props.text}</span>
+      </button>
+    </Link>
+  )
+}
 
 const GoogleButton = () => {
   return (
@@ -42,4 +51,4 @@ const LoginButton = (props) => {
 }
 
 
-export { FancyButton, GoogleButton, LoginButton }
+export { LogoutButton, FancyButton, GoogleButton, LoginButton }
