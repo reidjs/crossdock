@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import { StoreCtx, DispatchCtx } from '../store-ctx'
-import { navigate } from 'gatsby'
+import { navigate, Link } from 'gatsby'
 // import Layout from '../components/layout'
 import firebase from 'firebase/app'
 import { LogoutButton, LoginButton } from '../components/fancy-button'
@@ -187,6 +187,8 @@ const UserAccount = () => {
   })
   return (
     <div className={`p-4 flex flex-col items-center`}>
+      <Link to="/find-warehouse"> <button className={`w-full p-6 bg-green-600 font-bold text-base md:text-2xl text-white`}>Find Docks &amp; Warehouses</button></Link>
+
       <h1 className={`text-4xl my-8`}>Your Account</h1>
       <form className={`container max-w-2xl p-8`}>
         <div className={`flex flex-col mb-6`}>

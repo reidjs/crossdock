@@ -133,8 +133,8 @@ const UserLogin = () => {
   })
 
   return (
-      <div>
-      <form className="max-w-xl my-4 mx-auto">
+      <div className="">
+      <form className="bg-white text-black max-w-xl my-4 mx-auto">
         <h1 className={`text-4xl mb-8`}>Sign in to CrossDock</h1>
         <div className={`flex flex-col mb-6`}>
           <label className={`font-bold`}>Email</label>

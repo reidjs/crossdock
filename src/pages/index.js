@@ -7,16 +7,21 @@ import { FancyButton } from "../components/fancy-button"
 import s from './index.module.css'
 import hero from '../images/hero3.jpg'
 import vid from '../images/vid.mp4'
+import UserLogin from '../components/user-login'
+
 const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <section className={`hero flex relative min-w-full min-h-full flex-col justify-center container md:text-white text-shadow overflow-hidden w-full min-h-screen`}>
-        <div className={`p-16 w-full md:w-1/2`}>
-          <h1 className={`text-3xl md:text-6xl mb-10 font-semibold`}>Docks on Demand</h1>
+      <section className={`hero flex relative min-w-full min-h-full items-center flex-col md:flex-row justify-center container overflow-hidden w-full min-h-screen`}>
+        <div className={`p-16 w-full md:w-1/2 md:text-white text-shadow `}>
+          <h1 className={`text-3xl md:text-6xl mb-10 font-semibold `}>Docks on Demand</h1>
           <p className={`text-2xl mb-2`}>Don't let issues in transit affect your bottom line. Use CrossDock to book nearby warehouse and dock space instantly.</p>
           <p className={`text-lg font-light mb-8`}>We are a one-stop-shop to fix issues that occur in transit. Broken pallets? Shifted merchandise? Need to secure your truck for the day? Our intuitive technology platform will get you where you need to go. Fast.</p>
           <FancyButton text="Let's Go" />
+        </div>
+        <div className="text-black w-full md:w-1/2">
+        <UserLogin />
         </div>
         <img className={`relative md:absolute w-full h-full -z-1 max-h-full`} src={hero} />
       </section>
