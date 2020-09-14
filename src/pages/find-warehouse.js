@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Link } from "gatsby"
+import { Link, navigate } from "gatsby"
 import useFirebase from '../useFirebase';
 import fb from 'firebase/app';
 import logout from '../logout'
@@ -12,6 +12,8 @@ import Spinner from '../components/spinner'
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/checkout-form";
+import { useLocation } from '@reach/router';
+// TODO: https://www.gatsbyjs.com/docs/gatsby-link/ programmatic navigation
 
 const COPY = ['1. Finding nearby warehouses that fit criteria', '2. Contacting nearby warehouses', '3. Negotiating best price with nearby warehouses', '4. Done!']
 
@@ -19,6 +21,12 @@ const STEPS = ['1. Introduction', '2. Your Requirements', '3. Get Nearby Warehou
 const promise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 const FindWarehouse = () => {
+  // const x = URLSearchParams.get()
+  // console.log('x', x)
+  // const location = useLocation();
+  // console.log('location', location)
+  // console.log('location.search', location.search)
+
   const [step, setStep] = useState(0)
   const [searchCopy, setCopy] = useState(0)
   const [showBillingInformation, changeBillingInformation] = useState(false)
@@ -74,6 +82,8 @@ const FindWarehouse = () => {
 
   const changeStep = val => {
     reset()
+    // TODO: enable back/forward functionality
+    // navigate(`?step=${val}`)
     if (val == 2) {
       console.log('here')
       setIsActive(true)

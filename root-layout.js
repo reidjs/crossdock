@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect, useState } from 'react';
+import React, { useReducer, useEffect, useState } from 'react';
 import firebase from 'firebase/app';
 import useFirebase from './src/useFirebase';
 import { Helmet } from "react-helmet"

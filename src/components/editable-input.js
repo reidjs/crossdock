@@ -23,6 +23,11 @@ const EditableInput = (props) => {
   const focusInput = (e) => {
     setEditing(true)
   }
+  const handleOnKeyDown = e => {
+    if (e.key === 'Enter') {
+      inputRef.current.blur()
+    }
+  }
   useEffect(() => {
     inputRef.current.focus()
   }, [isEditing])
@@ -36,7 +41,7 @@ const EditableInput = (props) => {
         </div>
         <small className={`font-bold ${!changed && `hidden`}`}>{props.title}</small>
       </div>
-      <input ref={inputRef} onBlur={saveText} tabIndex={1} className={`${!isEditing && 'hidden '} p-2 nice-border`} placeholder={changed ? newText : props.text} type="text"></input>
+      <input onKeyDown={handleOnKeyDown} ref={inputRef} onBlur={saveText} tabIndex={1} className={`${!isEditing && 'hidden '} p-2 nice-border`} placeholder={changed ? newText : props.text} type="text"></input>
     </span>
   )
 }

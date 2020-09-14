@@ -85,7 +85,12 @@ const UserLogin = () => {
     setState(obj)
   }
   const authUser = (auth, email, password) => {
-    auth.createUserWithEmailAndPassword(email, password).catch(function (error) {
+    setLoaded('loggingin')
+    auth.createUserWithEmailAndPassword(email, password).then(function() {
+      auth.signInWithEmailAndPassword(email, password).then(function () {
+        navigate('/account')
+      })
+    }).catch(function (error) {
       console.log(error.code, error.message)
       if (error.code == 'auth/email-already-in-use') {
         auth.signInWithEmailAndPassword(email, password).then(function () {
@@ -132,15 +137,22 @@ const UserLogin = () => {
     }
   })
 
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      submit(e)
+    }
+  }
+
   return (
       <div className="">
       <form className="bg-white text-black max-w-xl my-4 mx-auto">
         <h1 className={`text-4xl mb-8`}>Sign in to CrossDock</h1>
+        {loaded === 'loggingin' && <Spinner />}
         <div className={`flex flex-col mb-6`}>
           <label className={`font-bold`}>Email</label>
-          <input className={`p-3 my-2 nice-border`} onChange={(e) => handleChange('email', e.target.value)} type="email" />
+          <input onKeyDown={handleKeyDown} className={`p-3 my-2 nice-border`} onChange={(e) => handleChange('email', e.target.value)} type="email" />
           <label className={`font-bold`}>Password</label>
-          <input className={`p-3 my-2 nice-border`} onChange={(e) => handleChange('password', e.target.value)} type="password" />
+          <input onKeyDown={handleKeyDown} className={`p-3 my-2 nice-border`} onChange={(e) => handleChange('password', e.target.value)} type="password" />
           <small>At least 6 characters</small>
         </div>
         {/* EMAIL/PASSWORD LOGIN */}

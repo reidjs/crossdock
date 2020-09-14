@@ -18,7 +18,7 @@ const Header = ({ siteTitle }) => (
             <h1>
               <Link className={s.links} to="/">
                 <div className="flex flex-col items-center justify-center">
-              <span className="text-2xl font-bold">{siteTitle}</span><div className="flex justify-between nowrap w-full"><span>✅</span><span>🚚</span> <span>🙅‍♂️ </span><span>🚚 </span><span>✅</span></div>
+              <span className="text-2xl font-bold">{siteTitle}</span><div className="flex justify-between nowrap w-full"><span role="img" aria-label="logo">✅</span><span role="img" aria-label="logo">🚚</span> <span role="img" aria-label="logo">🙅‍♂️ </span><span role="img" aria-label="logo">🚚 </span><span role="img" aria-label="logo">✅</span></div>
               </div>
               </Link>
             </h1>
