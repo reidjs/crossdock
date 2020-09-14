@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 import Layout from "../components/layout"
 import image from "../images/cargoship.png"
+import image2 from "../images/blogimage2.jpg"
+import image3 from "../images/blogimage3.jpg"
 import SEO from "../components/seo"
 import { FancyButton } from "../components/fancy-button"
 import s from './index.module.css'
@@ -27,17 +29,17 @@ const IndexPage = () => {
       </section>
       <section className={`container min-w-full p-10`}>
         <div className={`container min-w-full flex items-center justify-center flex-col min-h-half`}>
-          <h2 className={`uppercase`}>top blog posts</h2>
+          <h2 className={`uppercase font-bold mb-8`}>top blog posts</h2>
           <ul className={`flex flex-col md:flex-row`}>
-            <li className={`p-4 items-center flex md:flex-row flex-col`}>
-              <img className={`w-40 h-40 md:mr-4 mr-0`} src={image} />
+            <li className={`p-4 items-center flex md:flex-row md:w-1/3 flex-col`}>
+              <img className={`mb-4 w-40 h-40 md:mr-4 mr-0`} src={image} />
               <p className="text-center md:text-left">Trade Embargos Revisited: How do They Affect Us?</p>
             </li>
-            <li className={`p-4 items-center flex md:flex-row flex-col`}>
-              <img className={`w-40 h-40 md:mr-4 mr-0`} src={image} />
+            <li className={`p-4 items-center flex md:flex-row md:w-1/3 flex-col`}>
+              <img className={`w-40 h-40 mb-4 md:mr-4 mr-0`} src={image2} />
               <p className="text-center md:text-left">There's a New Player in the Freight Brokerage Game, and They're Breaking all the Rules.</p></li>
-            <li className={`p-4 items-center flex md:flex-row flex-col`}>
-              <img className={`w-40 h-40 md:mr-4 mr-0`} src={image} />
+            <li className={`p-4 items-center flex md:flex-row md:w-1/3 flex-col`}>
+              <img className={`w-40 h-40 mb-4 md:mr-4 mr-0`} src={image3} />
               <p className="text-center md:text-left">International Trade, How Does it Work? Who is Involved?</p></li>
           </ul>
         </div>
