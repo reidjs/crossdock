@@ -37,7 +37,7 @@ const IndexPage = () => {
         <div className={`${user ? 'hidden' : ''} text-black w-full md:w-1/2`}>
           <UserLogin />
         </div>
-        <div className={`${user ? '' : 'hidden'} nice-border rounded-lg overflow-hidden m-4 text-black md:w-3/4`}>
+        <div className={`${user ? '' : 'hidden'} nice-border rounded-lg overflow-hidden m-4 text-black w-full md:w-3/4`}>
           <UserAccount />
         </div>
         <img className={`relative md:absolute w-full h-full -z-1 max-h-full`} src={hero} />

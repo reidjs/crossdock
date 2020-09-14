@@ -7,7 +7,7 @@ const Login = () => {
   return (
     <Layout>
       <Seo title="Login" />
-      <UserLogin></UserLogin>
+      <UserLogin pushToAccountPage={true}></UserLogin>
     </Layout>
   )
 }
