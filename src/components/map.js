@@ -13,9 +13,9 @@ const MapContainer = (props) => {
 
 
   return (
-    <div>
+    <div className="z-10">
       {typeof window !== 'undefined' &&
-        <Map center={props.center} zoom={13}>
+        <Map style={{zIndex: '10'}} center={props.center} zoom={13}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />

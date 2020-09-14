@@ -17,7 +17,9 @@ const Header = ({ siteTitle }) => (
           <div className={`${s.brand}`}>
             <h1>
               <Link className={s.links} to="/">
-                {siteTitle}
+                <div className="flex flex-col items-center justify-center">
+              <span className="text-2xl font-bold">{siteTitle}</span><div className="flex justify-between nowrap w-full"><span>✅</span><span>🚚</span> <span>🙅‍♂️ </span><span>🚚 </span><span>✅</span></div>
+              </div>
               </Link>
             </h1>
           </div>

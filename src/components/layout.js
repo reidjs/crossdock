@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
         <a href="https://www.gatsbyjs.org">Gatsby</a>
       </footer> */}
       <footer className={`container flex flex-col justify-center items-center w-100 mx-auto my-0`}>
-        <ul className={`flex m-10`}>
+        <ul className={`flex m-10 flex-col md:flex-row`}>
           <li className={`mr-6`}>Why CrossDock</li>
           <li className={`mr-6`}>Logistics Services</li>
           <li className={`mr-6`}>Supply Chain Services</li>

@@ -119,34 +119,35 @@ const FindWarehouse = () => {
       // setStep(i)
     }
     return (
-      <div key={title} onClick={() => changeStep(idx)} className={`nice-border text-left mx-4 bg-blue-400 cursor-pointer text-white px-4 py-2 w-full ${step === idx && 'font-bold'}`} style={{ minWidth: calculatedWidth }}>{title}</div>
+      <div key={title} onClick={() => changeStep(idx)} className={`nice-border bg-white text-left mx-4 cursor-pointer px-4 py-2 w-full ${step === idx && 'font-bold bg-blue-400 text-white'}`} style={{ minWidth: calculatedWidth }}>{title}</div>
     )
   })
 
   return (
     <Layout>
       <SEO title="Find a Warehouse" />
+      <details className="p-10 md:hidden z-50">
+        <summary className="cursor-pointer" open>Show Steps</summary>
+        <div className="absolute z-50">
+          {discreteSteps}
+        </div>
+      </details>
+      <div className="mt-8 px-16 justify-center w-full hidden md:flex">
+        {discreteSteps}
+      </div>
       <div className={`my-0 mx-auto w-full flex`}>
-        <div className={`${step > 1 && `hidden`} w-1/2 md:w-1/4 mt-4 p-4`}>
+        <div className={`${step !== 1 ? `hidden`: ''} flex flex-col items-center w-full mt-4 p-16`}>
           <h2 className={`text-2xl mb-4`}>Your Information</h2>
           <EditableInput text="Where are you?" title="address" />
           <br />
           <EditableInput text="What's your license plate #?" title="license #" />
         </div>
-        <div className={` ${step > 1 ? `w-full md:w-full` : `md:w-3/4 w-1/2`} p-10`}>
+        <div className={` ${step !== 1  ? `w-full md:w-full` : `hidden`} p-10`}>
           <MapContainer center={position} />
         </div>
       </div>
       {/* <nav className={`px-8 justify-center`}> */}
-      <details className="p-10 md:hidden">
-        <summary className="cursor-pointer" open>Show Steps</summary>
-        <div className="absolute z-10">
-          {discreteSteps}
-        </div>
-      </details>
-      <div className="px-16 justify-center w-full hidden md:flex">
-        {discreteSteps}
-      </div>
+
       {/* </nav> */}
       {/* <div className="flex flex-col items-center w-full"> */}
       <div className={`${step !== 0 ? `hidden` : 'm-container'}`}>
@@ -158,7 +159,7 @@ const FindWarehouse = () => {
             <li>Keep your cargo safe for extended periods of time</li>
           </ul>
         </div>
-        <button onClick={nextStep} className={`w-full p-6 bg-green-600 font-bold text-2xl text-white`}>Find Warehouse</button>
+        <button onClick={nextStep} className={`w-full p-6 bg-green-600 font-bold text-base md:text-2xl text-white`}>Find Docks &amp; Warehouses</button>
       </div>
       <div className={`${step !== 1 ? `hidden ` : 'm-container'}`}>
         <div className={`min-w-full p-4 mb-16`}>
@@ -225,23 +226,23 @@ const FindWarehouse = () => {
       </div>
       <div className={`${step !== 3 ? `hidden ` : `m-container `}`}>
         <div className={`flex flex-col container p-5 mb-16`}>
-          <h2 className={`text-2xl mb-4`}>We found these warehouses (TODO: show on map)</h2>
+          <h2 className={`text-2xl mb-4`}>We found these warehouses</h2>
           <ul>
-            <li className={`flex mb-4`}>
+            <li className={`flex mb-4 flex-col md:flex-row`}>
               <details className="mr-16 w-64">
                 <summary>Albany Warehouse Dock #1432</summary>
                 <p>Supervisor: Johnny Cash</p>
                 <p>Address: 99 Main Street, Albany CA 92323</p>
               </details>
-              <button className="w-64 h-16 flex items-center" onClick={nextStep}>ACCEPT ($344.00)</button>
+              <button className="h-16 w-full md:w-64 flex items-center" onClick={nextStep}>ACCEPT ($344.00)</button>
             </li>
-            <li className={`flex`}>
+            <li className={`flex flex-col md:flex-row`}>
               <details className="mr-16 w-64 flex items-center">
                 <summary>Oakland Port Dock #122</summary>
                 <p>Supervisor: Joe Smith</p>
                 <p>Address: 442 Fake Street, Oakland CA 93323</p>
               </details>
-              <button className="w-64 h-16 flex items-center" onClick={nextStep}>ACCEPT ($439.22)</button>
+              <button className="md:w-64 w-full h-16 flex items-center" onClick={nextStep}>ACCEPT ($439.22)</button>
             </li>
           </ul>
 
@@ -262,14 +263,14 @@ const FindWarehouse = () => {
           </div>
         </div>
         <div className={`flex w-full flex-col md:flex-row`}>
-          <button onClick={() => changeStep(3)} className={`w-full p-6 bg-red-500 font-bold text-2xl text-white`}>Back to warehouses</button>
-          <button onClick={nextStep} className={`w-full p-6 bg-green-500 font-bold text-2xl text-white`}>Pay &amp; Get Directions</button>
+          <button onClick={() => changeStep(3)} className={`w-full p-6 bg-red-500  text-base md:text-2xl font-bold text-white`}>Back to warehouses</button>
+          <button onClick={nextStep} className={`w-full p-6 bg-green-500 font-bold text-base md:text-2xl text-white`}>Pay &amp; Get Directions</button>
         </div>
       </div>
       <div className={`${step !== 5 ? `hidden ` : `m-container `}`}>
         <h2 className={`text-2xl`}>Thank you for booking through CrossDock.</h2>
         <ul>
-          <li>Click here for directions to the warehouse</li>
+          <li><a className="text-blue-500 underline" href="#">Get directions to the warehouse</a></li>
           <li>Print out your billing information</li>
           <li>Contact support</li>
         </ul>

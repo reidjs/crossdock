@@ -212,10 +212,11 @@ const UserAccount = () => {
       {/* </form> */}
       <h1 className={`text-4xl my-8`}>{`Your Truck${numTrucks > 1 ? 's' : ''} (${numTrucks})`}</h1>
       <form className={`mb-4 container max-w-2xl p-8`}>
+        <LoginButton onClick={addTruck} text="Add new truck" />
+
         <ul>
           {truckList}
         </ul>
-        <LoginButton onClick={addTruck} text="Add new truck" />
       </form>
       {/* <form className={`container max-w-2xl p-8`}>
           <h1 className={`text-4xl mb-8`}>Your Warehouses</h1>
