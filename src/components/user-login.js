@@ -89,14 +89,18 @@ const UserLogin = () => {
     auth.createUserWithEmailAndPassword(email, password).then(function() {
       auth.signInWithEmailAndPassword(email, password).then(function () {
         navigate('/account')
+      }).catch(function () {
+        setLoaded('failed')
       })
     }).catch(function (error) {
       console.log(error.code, error.message)
+      setLoaded('failed')
       if (error.code == 'auth/email-already-in-use') {
         auth.signInWithEmailAndPassword(email, password).then(function () {
           navigate('/account')
         }).catch(function (error2) {
           console.log(error2.code, error2.message)
+          setLoaded('failed')
         })
       }
     });
