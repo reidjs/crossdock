@@ -6,7 +6,7 @@ const Account = () => {
   return (
     <Layout>
       <SEO title="Account"/>
-      <UserAccount />
+      <UserAccount pushToAccountPage={true} />
     </Layout>
   )
 }

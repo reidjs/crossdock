@@ -13,9 +13,12 @@ const COPY2 = ['Register an Account', 'Log in to your Account']
 // Doesnt work bc component doesnt repaint in time:
 const GUESTCOPY = ['Continue as Guest', 'Logging you in...']
 
-const UserLogin = () => {
+const UserLogin = (props) => {
   const [failMessage, setError] = useState('')
   const [loaded, setLoaded] = useState('')
+  const pushUser = () => {
+    if (props.pushToAccountPage) navigate('/account')
+  }
   // const [hasMounted, setHasMounted] = React.useState(false);
   // const [guestCopyIdx, changeGuestCopy] = useState(0)
   // let guestCopyIdx = 0
@@ -66,7 +69,8 @@ const UserLogin = () => {
         });
       } else {
         console.log('User already signed-in Firebase.');
-        navigate('/account')
+        // navigate('/account')
+        pushUser()
       }
     });
   }
@@ -88,7 +92,8 @@ const UserLogin = () => {
     setLoaded('loggingin')
     auth.createUserWithEmailAndPassword(email, password).then(function() {
       auth.signInWithEmailAndPassword(email, password).then(function () {
-        navigate('/account')
+        // navigate('/account')
+        pushUser()
       }).catch(function () {
         setLoaded('failed')
       })
@@ -97,7 +102,8 @@ const UserLogin = () => {
       setLoaded('failed')
       if (error.code == 'auth/email-already-in-use') {
         auth.signInWithEmailAndPassword(email, password).then(function () {
-          navigate('/account')
+          // navigate('/account')
+          pushUser()
         }).catch(function (error2) {
           console.log(error2.code, error2.message)
           setLoaded('failed')
@@ -137,7 +143,8 @@ const UserLogin = () => {
     }
     if (loaded === 'pushuser') {
       console.log('here!')
-      navigate('/account')
+      // navigate('/account')
+      pushUser()
     }
   })
 
