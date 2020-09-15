@@ -61,7 +61,7 @@ const WebcamCapture = ({ callback }) => {
     const widthCalcPx = ((windowDimensions.width - 100) / devices.length) + "px"
     return (
       <div key={idx} className={`flex flex-col items-center my-0 mx-auto justify-center ${done ? 'hidden' : ''}`} style={{ width: widthCalc }}>
-        <div>
+        <div className={imageSrc ? `hidden` : ''}>
           <Webcam
             ref={webcamRef}
             screenshotFormat="image/jpeg"
@@ -69,8 +69,8 @@ const WebcamCapture = ({ callback }) => {
             width={widthCalcPx}
             videoConstraints={{ deviceId: device.deviceId }} />
           {/* {device.label || `Device ${key + 1}`} */}
-          <img src={imageSrc} />
         </div>
+        <img className={imageSrc ? '' : 'hidden'} src={imageSrc} />
         <button onClick={imageSrc ? reset : capture}>{!imageSrc ? 'Capture photo' : 'Retake Photo'}</button>
         <button className={`bg-green-500 ${imageSrc ? '' : 'hidden'}`} onClick={finished}>Use Picture</button>
       </div>

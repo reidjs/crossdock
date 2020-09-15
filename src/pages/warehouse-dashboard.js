@@ -140,11 +140,11 @@ const WarehouseDashboard = () => {
           <h2 className="font-bold text-2xl">1. Upload your GS1 Bill of Lading (BOL)</h2>
           <ul>
             <li className="mb-8">
-            <button onClick={useFileUpload}>Upload</button>
+              <button onClick={useFileUpload}>Upload</button>
               <div className={mediaType === 1 ? '' : 'hidden'}>
-              <input onChange={handleFileUpload} type="file" accept="image/*" capture="camera" />
-              <img src={uploadedImage} />
-              <button className={`bg-green-500 ${uploadedImage ? '' : 'hidden'}`} onClick={nextStep}>Use Uploaded Picture</button>
+                <input onChange={handleFileUpload} type="file" accept="image/*" capture="camera" />
+                <img src={uploadedImage} />
+                <button className={`bg-green-500 ${uploadedImage ? '' : 'hidden'}`} onClick={nextStep}>Use Uploaded Picture</button>
               </div>
             </li>
             {/* <h2>Scan the BOL Using your Webcam or Phone Camera</h2> */}
@@ -153,12 +153,12 @@ const WarehouseDashboard = () => {
               <small>Only works in Safari on iPhones</small>
               {mediaType === 2 && <WebcamCapture callback={useWebcamImage} />}
             </li>
-            <li  className="mb-8"><button className={"bg-red-500"} onClick={nextStep}>Input BOL Manually</button ></li>
+            <li className="mb-8"><button className={"bg-red-500"} onClick={nextStep}>Input BOL Manually</button ></li>
 
           </ul>
         </div>
         <div className={`flex flex-col items-center justify-center mx-auto my-10 w-full ${step !== 1 ? 'hidden ' : ''}`}>
-          hello
+          TODO: next step
         </div>
       </div>
     </Layout>
