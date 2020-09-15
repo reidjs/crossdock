@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 import Svg from './svg'
 const FancyButton = (props) => {
   return (
-    <Link to="/find-warehouse" className={s.btnwrap}>
+    <Link to="/start" className={s.btnwrap}>
       <button {...props} className={s.btn}>
         <span className={s.btntxt}>{props.text}</span>
       </button>

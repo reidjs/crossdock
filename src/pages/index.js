@@ -60,8 +60,8 @@ const IndexPage = () => {
         </div>
       </section>
       <section className={`relative hero justify-center flex-col flex min-w-full items-center`}>
-        <video className={`relative md:absolute max-h-full min-w-full md:min-h-screen`} style={{ width: "100%", zIndex: '-1' }} loop autoPlay muted playsInline><source src={vid} type="video/mp4" /></video>
-        <div className={`z-10 md:text-white flex flex-col ml-half sm:ml-0 p-8 md:pr-16`}>
+        <video className={`relative md:relative max-h-full min-w-full md:min-h-screen`} style={{ width: "100%", zIndex: '-1' }} loop autoPlay muted playsInline><source src={vid} type="video/mp4" /></video>
+        <div className={`md:absolute relative z-10 md:text-white flex flex-col ml-half sm:ml-0 p-8 md:pr-16`}>
           <h1 className={`text-3xl md:text-4xl lg:text-6xl mb-10 font-semibold text-shadow`}>We Are the Premium Dock and Warehouse Broker</h1>
           <p className={`text-2xl mb-2 text-shadow`}>Quick booking. Easy to use. Straightforward pricing.</p>
           <p className={`text-lg font-light mb-8 text-shadow`}>When you use CrossDock, you can't lose. </p>

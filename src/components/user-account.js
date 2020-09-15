@@ -187,7 +187,7 @@ const UserAccount = () => {
   })
   return (
     <div className={`bg-white p-4 flex flex-col items-center`}>
-      <Link to="/find-warehouse"> <button className={`w-full p-6 bg-green-600 font-bold text-base md:text-2xl text-white`}>Find Docks &amp; Warehouses</button></Link>
+      <Link to="/start"> <button className={`w-full p-6 bg-green-600 font-bold text-base md:text-2xl text-white`}>Find Docks &amp; Warehouses</button></Link>
 
       <h1 className={`text-4xl my-8`}>Your Account</h1>
       <form className={`container max-w-2xl p-8`}>
