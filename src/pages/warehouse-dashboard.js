@@ -158,7 +158,51 @@ const WarehouseDashboard = () => {
           </ul>
         </div>
         <div className={`flex flex-col items-center justify-center mx-auto my-10 w-full ${step !== 1 ? 'hidden ' : ''}`}>
-          TODO: next step
+          <table className="table-auto">
+            <tr>
+              <th>Shipper</th>
+              <th>Item</th>
+              <th>Batch</th>
+              <th>Quantity</th>
+            </tr>
+            <tr>
+              <td>Procter and Gamble</td>
+              <td>L'Oreal</td>
+              <td>7/1/2020</td>
+              <td>100 cases</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>7/15/2020</td>
+              <td>50 cases</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Head and Shoulders</td>
+              <td>6/1/2020</td>
+              <td>10 cases</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>Dove</td>
+              <td>5/1/2020</td>
+              <td>100 cases</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>6/15/2020</td>
+              <td>50 cases</td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>6/30/2020</td>
+              <td>50 cases</td>
+            </tr>
+          </table>
+          <small>sample data for demonstration purposes</small>
         </div>
       </div>
     </Layout>
