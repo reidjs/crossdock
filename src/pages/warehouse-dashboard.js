@@ -164,7 +164,7 @@ const WarehouseDashboard = () => {
           </div>
           <div className="flex w-full flex-col-reverse md:flex-row mt-8">
             <button className={`bg-red-500`} onClick={prevStep}>Revise</button>
-            <button className={`bg-green-500`} onClick={nextStep}>Done</button>
+            {/* <button className={`bg-green-500`} onClick={nextStep}>Done</button> */}
           </div>
         </div>
       </div>
