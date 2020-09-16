@@ -1,0 +1,17 @@
+.bol-table {
+    /* border: 1px solid #444; */
+    padding: 10px;
+    margin: 12px;
+}
+
+.bol-table tbody tr td {
+    padding: 5px;
+}
+
+.bol-table tbody .editable-rows td {
+    border: 1px solid black;
+}
+
+.bol-table tbody td>span {
+    width: 100%;
+}
