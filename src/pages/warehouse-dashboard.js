@@ -9,16 +9,6 @@ import { CSVLink, CSVDownload } from "react-csv";
 import gs1logo from '../images/gs1logo.png'
 import { StoreCtx, DispatchCtx } from '../store-ctx'
 
-
-const defaultRows = [
-  ['Procter and Gamble', 'L\'Oreal', '7/1/2020', '100 cases'],
-  ['', '', '7/15/2020', '50 cases'],
-  ['', 'Head and Shoulders', '6/1/2020', '10 cases'],
-  ['', 'Dove', '5/1/2020', '100 cases'],
-  ['', '', '6/15/2020', '50 cases'],
-  ['', '', '6/30/2020', '50 cases']
-]
-
 const BolTable = ({ editable, useOrig }) => {
   // const rows = props.rows || defaultRows
   // console.log('rows', rows)
@@ -128,23 +118,6 @@ const WarehouseDashboard = () => {
   const changeStep = newStep => {
     setStep(newStep)
   }
-  // const changeCell = (row, col, newText, oldText) => {
-  //   console.log('idx, newText, oldText', row, col, newText, oldText)
-  //   const t = rows
-  //   t[row][col] = newText
-  //   setRows(t)
-  // }
-
-  // const tableRows = rows.map((row, idx) => {
-  //   return (
-  //     <tr key={idx}>
-  //       <td><EditableInput style={1} text={row[0] || '\t'} callback={(oldText, newText) => changeCell(0, idx, oldText, newText)} /></td>
-  //       <td><EditableInput style={1} text={row[1]} callback={(oldText, newText) => changeCell(1, idx, oldText, newText)} /></td>
-  //       <td><EditableInput style={1} text={row[2]} callback={(oldText, newText) => changeCell(2, idx, oldText, newText)} /></td>
-  //       <td><EditableInput style={1} text={row[3]} callback={(oldText, newText) => changeCell(3, idx, oldText, newText)} /></td>
-  //     </tr>
-  //   )
-  // })
 
   return (
     <Layout>
@@ -152,19 +125,18 @@ const WarehouseDashboard = () => {
       <div className='flex flex-col items-center justify-center mx-auto my-10 w-full'>
         {/* <h1>Warehouse Dashboard</h1> */}
         <div className={`flex flex-col items-center justify-center mx-auto my-10 w-full ${step !== 0 ? 'hidden ' : ''}`}>
-          <h2 className="font-bold text-2xl mb-8">1. Upload your Bill of Lading (BOL)</h2>
+          <h2 className="font-bold text-2xl mb-8">1. Upload the Bill of Lading (BOL)</h2>
           <ul>
 
             {/* <h2>Scan the BOL Using your Webcam or Phone Camera</h2> */}
             <li className="mb-8">
-              <div className="flex cursor-pointer" onClick={turnOnWebcam}>
+              <div className="hidden md:flex cursor-pointer" onClick={turnOnWebcam}>
                 <img src={gs1logo} className="w-32 rounded-l-full nice-border border-r-0" />
-                <button className="bg-orange-600" >Scan the GS1 BOL Barcode using your Phone or Webcam</button>
+                <button className="bg-orange-600" >Scan the GS1 BOL Barcode</button>
               </div>
-              <small>Only works in Safari on iPhones</small>
               {mediaType === 2 && <WebcamCapture callback={useWebcamImage} />}
             </li>
-            <li className="mb-8">
+            <li className="mb-8 hidden md:block">
               <button onClick={useFileUpload}>Upload</button>
               <div className={mediaType === 1 ? '' : 'hidden'}>
                 <input onChange={handleFileUpload} type="file" accept="image/*" capture="camera" />
@@ -172,6 +144,18 @@ const WarehouseDashboard = () => {
                 <button className={`bg-green-500 ${uploadedImage ? '' : 'hidden'}`} onClick={nextStep}>Use Uploaded Picture</button>
               </div>
             </li>
+            <li className="block md:hidden mb-8">
+              <button className="bg-orange-600 rounded-lg flex flex-col items-center" onClick={useFileUpload}>
+              <img src={gs1logo} className="w-32" />
+                Scan the GS1 BOL Barcode
+                </button>
+              <div className={mediaType === 1 ? '' : 'hidden'}>
+                <input onChange={handleFileUpload} type="file" accept="image/*" capture="camera" />
+                <img src={uploadedImage} />
+                <button className={`bg-green-500 ${uploadedImage ? '' : 'hidden'}`} onClick={nextStep}>Use Uploaded Picture</button>
+              </div>
+            </li>
+            
             <li className="mb-8"><button className={"bg-red-500"} onClick={nextStep}>Input BOL Manually</button ></li>
 
           </ul>
