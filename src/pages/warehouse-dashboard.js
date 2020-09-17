@@ -23,12 +23,12 @@ const BolTable = ({ editable, useOrig }) => {
   // const rows = props.rows || defaultRows
   // console.log('rows', rows)
   // const changeCell = props.changeCell
-  const store = useContext(StoreCtx)
+  const store = useContext(StoreCtx) || { bol: [], bolOrig: [] }
   // const [rows, setRows] = useState(store.bol)
   const dispatch = useContext(DispatchCtx)
   const changeCell = (row, col, newText, oldText) => {
     // console.log('store.bol', store.bol)
-    if (!store.bol) return
+    if (!store || !store.bol) return
     // console.log('editable', editable)
     // console.log('idx, newText, oldText', row, col, newText, oldText)
     const t = []
@@ -45,43 +45,20 @@ const BolTable = ({ editable, useOrig }) => {
   const bol = useOrig ? store.bolOrig : store.bol
   const tableRows = bol.map((row, idx) => {
     const cells = row.map((r, idx2) => {
-      // if (editable) console.log('r', r)
       const key = '' + idx + idx2
       return (
         <td key={key}>
-          {/* <span className={editable ? 'block' : 'hidden'}> */}
+          {/* Something is triggering the saveText callback in editableInput over and over again causing glitchy reactivity */}
           <EditableInput style={1} text={r} callback={(newText, oldText) => changeCell(idx, idx2, newText, oldText)} />
-          {/* </span> */} 
           <span className={editable ? 'hidden' : 'block'}>{r}</span>
-          {/* {editable ? 
-          <span>{r}</span> :
-          <span>{r}</span>
-        } */}
         </td>
       )
     })
     return (
       <tr key={idx} className={s.editableRows}>
         {cells}
-        {/* <td><EditableInput style={1} text={row[0]} callback={(oldText, newText) => changeCell(0, idx, oldText, newText)} /></td>
-        <td><EditableInput style={1} text={row[1]} callback={(oldText, newText) => changeCell(1, idx, oldText, newText)} /></td>
-        <td><EditableInput style={1} text={row[2]} callback={(oldText, newText) => changeCell(2, idx, oldText, newText)} /></td>
-        <td><EditableInput style={1} text={row[3]} callback={(oldText, newText) => changeCell(3, idx, oldText, newText)} /></td> */}
       </tr>
     )
-    // if (props.editable) {
-    //   console.log('row', row.join())
-
-    // } else {
-    //   return (
-    //     <tr key={idx}>
-    //       <td>{row[0]}</td>
-    //       <td>{row[1]}</td>
-    //       <td>{row[2]}</td>
-    //       <td>{row[3]}</td>
-    //     </tr>
-    //   )
-    // }
   })
   return (
     <table className={`table-auto ${s.bolTable}`}>
@@ -214,7 +191,7 @@ const WarehouseDashboard = () => {
           <h3 className="mb-4">Ensure this updated data is accurate.</h3>
           <div className="cursor-pointer">
             {/* TODO: add data prop */}
-            <CSVLink data={store.bol} filename={"gs1-bol-updated-inventory.csv"} target="_blank">
+            <CSVLink data={store && store.bol} filename={"gs1-bol-updated-inventory.csv"} target="_blank">
               <Svg className="w-32 h-32" html={`<path xmlns="http://www.w3.org/2000/svg" d="M336,176h40a40,40,0,0,1,40,40V424a40,40,0,0,1-40,40H136a40,40,0,0,1-40-40V216a40,40,0,0,1,40-40h40" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><polyline xmlns="http://www.w3.org/2000/svg" points="176 272 256 352 336 272" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><line xmlns="http://www.w3.org/2000/svg" x1="256" y1="48" x2="256" y2="336" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>`} />
               <p>Download as CSV</p>
             </CSVLink>
