@@ -33,8 +33,13 @@ const IndexPage = () => {
           <p className={`text-2xl mb-2`}>Don't let issues in transit affect your bottom line. Use CrossDock to book nearby warehouse and dock space instantly.</p>
           <p className={`text-lg font-light mb-8`}>We are a one-stop-shop to fix issues that occur in transit. Broken pallets? Shifted merchandise? Need to secure your truck for the day? Our intuitive technology platform will get you where you need to go. Fast.</p>
           {/* <button></button> */}
-          <WarehouseStartButton />
-          <TruckerStartButton />
+          <Link to="/start"><h2 className="text-2xl mb-4 underline cursor-pointer">Get Started Now</h2></Link>
+          <div className="mb-8 max-w-lg">
+            <WarehouseStartButton />
+          </div>
+          <div className="max-w-lg">
+            <TruckerStartButton />
+          </div>
           {/* <FancyButton text="Let's Go" /> */}
         </div>
         <div className={`${user ? 'hidden' : ''} text-black w-full md:w-1/2`}>
@@ -68,7 +73,7 @@ const IndexPage = () => {
           <h1 className={`text-3xl md:text-4xl lg:text-6xl mb-10 font-semibold text-shadow`}>We Are the Premium Dock and Warehouse Broker</h1>
           <p className={`text-2xl mb-2 text-shadow`}>Quick booking. Easy to use. Straightforward pricing.</p>
           <p className={`text-lg font-light mb-8 text-shadow`}>When you use CrossDock, you can't lose. </p>
-          <FancyButton text="Learn More" />
+          <FancyButton text="Get Started" />
         </div>
       </section>
     </Layout>
