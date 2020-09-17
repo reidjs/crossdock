@@ -199,8 +199,9 @@ const UserAccount = () => {
               <label className={`font-bold`}>Your Email</label>
             </li>
             <li className="mb-4"><EditableInput title="Your Name" text={name ? name : 'What\'s your name?'} callback={(t) => handleBlur('name', t)} /></li>
-            <li className="mb-4"><EditableInput title="Your Age" text="How old are you?" /></li>
-            <li className="mb-4"><EditableInput title="Your Phone Number" text="What's your phone number?" /></li>
+            {/* <li className="mb-4"><EditableInput title="Your Age" text="How old are you?" /></li> */}
+            <li className="mb-4"><EditableInput title="Your Phone Number" text="Phone Number" /></li>
+            {/* <li className="mb-4"><EditableInput title="Your Phone Number" text="Phone Number" /></li> */}
           </ul>
         </div>
       </form>

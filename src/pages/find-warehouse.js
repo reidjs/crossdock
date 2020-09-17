@@ -180,7 +180,7 @@ const FindWarehouse = () => {
               <details open>
                 <summary>How long do you need to dock? (required)</summary>
                 <div className={`p-4`}>
-                  <EditableInput title="time needed (hours, days, etc.)" text="1 hour" />
+                  <EditableInput title="time needed" text="1 hour" />
                   <br />
                   <EditableInput title="expected time of arrival" text="3:00pm" />
                 </div>
@@ -188,28 +188,28 @@ const FindWarehouse = () => {
             </li>
             <li>
               <details>
-                <summary>Do you need any help or special equipment?</summary>
+                <summary>What service do you need?</summary>
                 <div className={`p-4`}>
-                  <EditableInput title="help required (number of workers, tools, etc)" text="A dockhand and some pallets, etc" />
+                  <EditableInput title="service required" text="Reworking of product, re-palletizing, new pallets, etc." />
                 </div>
               </details>
             </li>
-            <li>
+            {/* <li>
               <details>
                 <summary>How far away can the warehouse be?</summary>
                 <div className={`p-4`}>
                   <EditableInput title="distance to warehouse" text="Up to 2 miles away, etc" />
                 </div>
               </details>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <details>
                 <summary>How much are you willing to spend?</summary>
                 <div className={`p-4`}>
                   <EditableInput title="cost" text="between $200 and $500, etc" callback={setCost} />
                 </div>
               </details>
-            </li>
+            </li> */}
           </ul>
         </div>
 
