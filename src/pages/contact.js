@@ -25,7 +25,7 @@ const Contact = () => {
           <div>
             <img className="rounded-full" src={steve} />
             <div className="text-center">
-            <h1 className="font-bold">Stephen Schlect</h1>
+            <h1 className="font-bold">Stephen Schlecht</h1>
             <small>Supply Chain Manager</small>
             <ul>
               <li>Business Planning</li>

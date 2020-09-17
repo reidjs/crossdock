@@ -1,6 +1,50 @@
+# CrossDock
+[Live Website (https://crossdock.me)](https://crossdock.me)
+
+## About
+Built over 12 days for the [GS-1 Flexible and Resilient: Future Proofing the Supply Chain Hackathon](https://gs1us-futureproofhack-platform.bemyapp.com/)
+
+[Started September 5th, 2020](https://github.com/reidjs/crossdock/commit/6a3fa4a1b4d66fa3dd32a2a3086792e75e9fd3b3)
+
+By [Reid Sherman](https://www.linkedin.com/in/reidsherman/) and [Stephen Schlecht](https://www.linkedin.com/in/stephenschlecht/)
+
+## How to Use
+
 ## Development
 
-TODO:
+`yarn install`  
+`npm start`  
+Requires crossdock-server running (separate repo) for payment processing.
+
+## Deployment
+Build site and rsync to server:  
+`npm run deploy`
+
+## Dependencies
+
+React  
+*Web Framework*
+
+Gatsby  
+*Server side renderer*  
+
+TailwindCSS  
+*Design Library*
+
+Node.JS with Express  
+*Server language*
+
+NGINX  
+*Web Server and Reverse Proxy*
+
+Stripe  
+*Payment Processor*
+
+Leaflet and OpenStreetMaps  
+*Mapping Library*
+
+
+### TODO
 header search
 - should open drawer that has quick links to 
   - account page > /account
@@ -9,6 +53,9 @@ header search
   - payment info > acct page
   - support > /resources
 
+
+login page
+- add facebook/etc login
 
 index page
 - add signup form
@@ -24,38 +71,4 @@ find-warehouse page
   - 
 
 - 
-
-Requires crossdock-server for payment stuff
-```
-users: {
-  uid,
-  email,
-  name,
-  truckIds: [tid1, tid2]
-}
-trucks: {
-  tid,
-  licensePlate,
-  make,
-  model,
-}
-warehouse: {
-  wid,
-  address,
-  hours,
-}
-```
-
-tailwind breakpoints
-'sm': '640px',
-// => @media (min-width: 640px) { ... }
-
-'md': '768px',
-// => @media (min-width: 768px) { ... }
-
-'lg': '1024px',
-// => @media (min-width: 1024px) { ... }
-
-'xl': '1280px',
-// => @media (min-width: 1280px) { ... }
 
