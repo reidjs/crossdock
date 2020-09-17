@@ -45,21 +45,24 @@ Leaflet and OpenStreetMaps
 
 
 ### TODO
-header search
-- should open drawer that has quick links to 
-  - account page > /account
-  - find warehouse > find warehouse
-  - find dock > find warehouse
-  - payment info > acct page
-  - support > /resources
+- warehouse-dashboard
+  - fix glitchy edit BOL table
+  - back/forward button browser history
 
+- header
+- search
+  - should open drawer that has quick links to 
+    - account page > /account
+    - find warehouse > find warehouse
+    - find dock > find warehouse
+    - payment info > acct page
+    - support > /resources
 
-login page
-- add facebook/etc login
+- login page
+  - add facebook/etc login
 
-index page
-- add signup form
-- change blog post images
+- index
+  - blog links should actually link somehwere
 
 find-warehouse page
 - Login information should show up on the first step
@@ -69,6 +72,3 @@ find-warehouse page
   - push info 
   - backend UI to see all websocket connections and user info 
   - 
-
-- 
-
