@@ -3,7 +3,7 @@ import { StoreCtx, DispatchCtx } from '../store-ctx'
 import { navigate, Link } from 'gatsby'
 // import Layout from '../components/layout'
 import firebase from 'firebase/app'
-import { LogoutButton, LoginButton } from '../components/fancy-button'
+import { LogoutButton, LoginButton, WarehouseStartButton, TruckerStartButton } from '../components/fancy-button'
 import Svg from '../components/svg'
 import truck from '../images/truck.jpg'
 import EditableInput from '../components/editable-input'
@@ -187,7 +187,15 @@ const UserAccount = () => {
   })
   return (
     <div className={`bg-white p-4 flex flex-col items-center`}>
-      <Link to="/start"> <button className={`w-full p-6 bg-green-600 font-bold text-base md:text-2xl text-white`}>Find Docks &amp; Warehouses</button></Link>
+      <div className="flex flex-col md:flex-row">
+        <span className="w-full md:w-1/2 mr-8">
+          <WarehouseStartButton />
+        </span>
+        <span className="w-full md:w-1/2">
+          <TruckerStartButton />
+        </span>
+      </div>
+      {/* <Link to="/start"> <button className={`w-full p-6 bg-green-600 font-bold text-base md:text-2xl text-white`}>Find Docks &amp; Warehouses</button></Link> */}
 
       <h1 className={`text-4xl my-8`}>Your Account</h1>
       <form className={`container max-w-2xl p-8`}>

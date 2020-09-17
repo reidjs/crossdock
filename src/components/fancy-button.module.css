@@ -172,7 +172,7 @@ s.btnwrap {
     cursor: pointer;
     border: 1px solid #FA5959;
     border-radius: 5px;
-    padding: 14px 50px 14px 50px;
+    /* padding: 14px 50px 14px 50px; */
     display: inline-block;
     /* color: #265DF1; */
     /* background: #FFFFFF; */
