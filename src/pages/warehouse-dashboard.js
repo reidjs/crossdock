@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useContext, useEffect, useCallback, useRef } from 'react'
 import Layout from '../components/layout'
 import Seo from '../components/seo'
 import WebcamCapture from '../components/webcam-capture';
@@ -6,6 +6,9 @@ import EditableInput from '../components/editable-input'
 import Svg from '../components/svg'
 import s from './warehouse-dashboard.module.css'
 import { CSVLink, CSVDownload } from "react-csv";
+import gs1logo from '../images/gs1logo.png'
+import { StoreCtx, DispatchCtx } from '../store-ctx'
+
 
 const defaultRows = [
   ['Procter and Gamble', 'L\'Oreal', '7/1/2020', '100 cases'],
@@ -16,29 +19,69 @@ const defaultRows = [
   ['', '', '6/30/2020', '50 cases']
 ]
 
-const BolTable = (props) => {
-  const rows = props.rows
-  const changeCell = props.changeCell
-  const tableRows = rows.map((row, idx) => {
-    if (props.editable) {
-      return (
-        <tr key={idx} className={s.editableRows}>
-          <td><EditableInput style={1} text={row[0]} callback={(oldText, newText) => changeCell(0, idx, oldText, newText)} /></td>
-          <td><EditableInput style={1} text={row[1]} callback={(oldText, newText) => changeCell(1, idx, oldText, newText)} /></td>
-          <td><EditableInput style={1} text={row[2]} callback={(oldText, newText) => changeCell(2, idx, oldText, newText)} /></td>
-          <td><EditableInput style={1} text={row[3]} callback={(oldText, newText) => changeCell(3, idx, oldText, newText)} /></td>
-        </tr>
-      )
-    } else {
-      return (
-        <tr key={idx}>
-          <td>{row[0]}</td>
-          <td>{row[1]}</td>
-          <td>{row[2]}</td>
-          <td>{row[3]}</td>
-        </tr>
-      )
+const BolTable = ({ editable, useOrig }) => {
+  // const rows = props.rows || defaultRows
+  // console.log('rows', rows)
+  // const changeCell = props.changeCell
+  const store = useContext(StoreCtx)
+  // const [rows, setRows] = useState(store.bol)
+  const dispatch = useContext(DispatchCtx)
+  const changeCell = (row, col, newText, oldText) => {
+    // console.log('store.bol', store.bol)
+    if (!store.bol) return
+    // console.log('editable', editable)
+    // console.log('idx, newText, oldText', row, col, newText, oldText)
+    const t = []
+    for (let i = 0; i < store.bol.length; i++) {
+      t.push(store.bol[i].slice(0))
     }
+    t[row][col] = newText
+    // console.log('t', t)
+    // setRows(t)
+    dispatch({ type: 'UPDATE_BOL', bol: t })
+  }
+  // const that = this
+  // callback={(newText, oldText) => changeCell(idx, idx2, newText, oldText)} 
+  const bol = useOrig ? store.bolOrig : store.bol
+  const tableRows = bol.map((row, idx) => {
+    const cells = row.map((r, idx2) => {
+      // if (editable) console.log('r', r)
+      const key = '' + idx + idx2
+      return (
+        <td key={key}>
+          {/* <span className={editable ? 'block' : 'hidden'}> */}
+          <EditableInput style={1} text={r} callback={(newText, oldText) => changeCell(idx, idx2, newText, oldText)} />
+          {/* </span> */} 
+          <span className={editable ? 'hidden' : 'block'}>{r}</span>
+          {/* {editable ? 
+          <span>{r}</span> :
+          <span>{r}</span>
+        } */}
+        </td>
+      )
+    })
+    return (
+      <tr key={idx} className={s.editableRows}>
+        {cells}
+        {/* <td><EditableInput style={1} text={row[0]} callback={(oldText, newText) => changeCell(0, idx, oldText, newText)} /></td>
+        <td><EditableInput style={1} text={row[1]} callback={(oldText, newText) => changeCell(1, idx, oldText, newText)} /></td>
+        <td><EditableInput style={1} text={row[2]} callback={(oldText, newText) => changeCell(2, idx, oldText, newText)} /></td>
+        <td><EditableInput style={1} text={row[3]} callback={(oldText, newText) => changeCell(3, idx, oldText, newText)} /></td> */}
+      </tr>
+    )
+    // if (props.editable) {
+    //   console.log('row', row.join())
+
+    // } else {
+    //   return (
+    //     <tr key={idx}>
+    //       <td>{row[0]}</td>
+    //       <td>{row[1]}</td>
+    //       <td>{row[2]}</td>
+    //       <td>{row[3]}</td>
+    //     </tr>
+    //   )
+    // }
   })
   return (
     <table className={`table-auto ${s.bolTable}`}>
@@ -61,15 +104,24 @@ const WarehouseDashboard = () => {
   const [step, setStep] = useState(0)
   const [uploadedImage, setUploadedImage] = useState(null)
   const [mediaType, setMediaType] = useState(0)
-  // const [rows, setRows] = useState(defaultRows)
-  const [rows, setRows] = useState(defaultRows)
+  const store = useContext(StoreCtx)
 
-  const changeCell = (row, col, newText, oldText) => {
-    // console.log('idx, newText, oldText', row, col, newText, oldText)
-    const t = rows
-    t[row][col] = newText
-    setRows(t)
-  }
+  // const [rows, setRows] = useState(defaultRows)
+  // let rows = defaultRows
+
+  // function changeCell(row, col, newText, oldText) {
+  //   if (!rows) return
+  //   // console.log('idx, newText, oldText', row, col, newText, oldText)
+  //   const t = []
+  //   for(let i = 0; i < rows.length; i++) {
+  //     t.push(rows[i].slice(0))
+  //   }
+  //   t[row][col] = newText
+  //   console.log('t', t)
+  //   setRows(t)
+  // }
+  const rows = [[]]
+
   const handleFileUpload = e => {
     e.persist()
     const file = e.target.files[0]
@@ -123,8 +175,18 @@ const WarehouseDashboard = () => {
       <div className='flex flex-col items-center justify-center mx-auto my-10 w-full'>
         {/* <h1>Warehouse Dashboard</h1> */}
         <div className={`flex flex-col items-center justify-center mx-auto my-10 w-full ${step !== 0 ? 'hidden ' : ''}`}>
-          <h2 className="font-bold text-2xl mb-8">1. Upload your GS1 Bill of Lading (BOL)</h2>
+          <h2 className="font-bold text-2xl mb-8">1. Upload your Bill of Lading (BOL)</h2>
           <ul>
+
+            {/* <h2>Scan the BOL Using your Webcam or Phone Camera</h2> */}
+            <li className="mb-8">
+              <div className="flex cursor-pointer" onClick={turnOnWebcam}>
+                <img src={gs1logo} className="w-32 rounded-l-full nice-border border-r-0" />
+                <button className="bg-orange-600" >Scan the GS1 BOL Barcode using your Phone or Webcam</button>
+              </div>
+              <small>Only works in Safari on iPhones</small>
+              {mediaType === 2 && <WebcamCapture callback={useWebcamImage} />}
+            </li>
             <li className="mb-8">
               <button onClick={useFileUpload}>Upload</button>
               <div className={mediaType === 1 ? '' : 'hidden'}>
@@ -133,33 +195,28 @@ const WarehouseDashboard = () => {
                 <button className={`bg-green-500 ${uploadedImage ? '' : 'hidden'}`} onClick={nextStep}>Use Uploaded Picture</button>
               </div>
             </li>
-            {/* <h2>Scan the BOL Using your Webcam or Phone Camera</h2> */}
-            <li className="mb-8">
-              <button onClick={turnOnWebcam}>Scan using your Phone or Webcam</button>
-              <small>Only works in Safari on iPhones</small>
-              {mediaType === 2 && <WebcamCapture callback={useWebcamImage} />}
-            </li>
             <li className="mb-8"><button className={"bg-red-500"} onClick={nextStep}>Input BOL Manually</button ></li>
 
           </ul>
         </div>
         <div className={`flex flex-col items-center justify-center mx-auto my-10 w-full md:w-3/4 ${step !== 1 ? 'hidden ' : ''}`}>
-          <h2 className="font-bold text-2xl mb-8">2. Update Inventory</h2>
-          <BolTable changeCell={changeCell} rows={rows} editable />
-          <small>sample data for demonstration purposes</small>
+          <h2 className="font-bold text-2xl">2. Result from Scan</h2>
+          <small className="mb-8">sample data for demonstration purposes</small>
+          <BolTable useOrig={true} />
           <div className="flex w-full flex-col-reverse md:flex-row mt-8">
             <button className={`bg-red-500`} onClick={prevStep}>Back</button>
             <button className={`bg-green-500`} onClick={nextStep}>Continue</button>
           </div>
         </div>
         <div className={`flex flex-col items-center justify-center mx-auto my-10 w-full md:w-3/4 ${step !== 2 ? 'hidden ' : ''}`}>
-          <h2 className="font-bold text-2xl mb-8">3. Verify and Send Updated BOL</h2>
-          <BolTable changeCell={changeCell} rows={rows}/>
+          <h2 className="font-bold text-2xl mb-8">3. Update and Send Updated BOL</h2>
+          <BolTable />
           <h3 className="mb-4">Ensure this updated data is accurate.</h3>
           <div className="cursor-pointer">
-            <CSVLink data={rows} filename={"gs1-bol-updated-inventory.csv"} target="_blank">
-            <Svg className="w-32 h-32" html={`<path xmlns="http://www.w3.org/2000/svg" d="M336,176h40a40,40,0,0,1,40,40V424a40,40,0,0,1-40,40H136a40,40,0,0,1-40-40V216a40,40,0,0,1,40-40h40" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><polyline xmlns="http://www.w3.org/2000/svg" points="176 272 256 352 336 272" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><line xmlns="http://www.w3.org/2000/svg" x1="256" y1="48" x2="256" y2="336" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>`} />
-            <p>Download as CSV</p>
+            {/* TODO: add data prop */}
+            <CSVLink data={store.bol} filename={"gs1-bol-updated-inventory.csv"} target="_blank">
+              <Svg className="w-32 h-32" html={`<path xmlns="http://www.w3.org/2000/svg" d="M336,176h40a40,40,0,0,1,40,40V424a40,40,0,0,1-40,40H136a40,40,0,0,1-40-40V216a40,40,0,0,1,40-40h40" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><polyline xmlns="http://www.w3.org/2000/svg" points="176 272 256 352 336 272" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/><line xmlns="http://www.w3.org/2000/svg" x1="256" y1="48" x2="256" y2="336" style="fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px"/>`} />
+              <p>Download as CSV</p>
             </CSVLink>
           </div>
           <div className="flex w-full flex-col-reverse md:flex-row mt-8">

@@ -2,7 +2,7 @@
 [Live Website (https://crossdock.me)](https://crossdock.me)
 
 ## About
-Built over 12 days for the [GS-1 Flexible and Resilient: Future Proofing the Supply Chain Hackathon](https://gs1us-futureproofhack-platform.bemyapp.com/)
+Built over two weeks for the [GS-1 Flexible and Resilient: Future Proofing the Supply Chain Hackathon](https://gs1us-futureproofhack-platform.bemyapp.com/)
 
 [Started September 5th, 2020](https://github.com/reidjs/crossdock/commit/6a3fa4a1b4d66fa3dd32a2a3086792e75e9fd3b3)
 

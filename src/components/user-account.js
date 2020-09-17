@@ -187,6 +187,7 @@ const UserAccount = () => {
   })
   return (
     <div className={`bg-white p-4 flex flex-col items-center`}>
+      <h2 className="underline text-xl mb-4">Get Started Now</h2>
       <div className="flex flex-col md:flex-row">
         <span className="w-full md:w-1/2 mr-8">
           <WarehouseStartButton />
@@ -203,8 +204,8 @@ const UserAccount = () => {
           <h1 className={`text-4xl mb-8`}>About you</h1>
           <ul className="flex flex-col">
             <li className="mb-4 flex flex-col">
-              <span>{store && store.user && store.user.email}</span>
               <label className={`font-bold`}>Your Email</label>
+              <span>{store && store.user && store.user.email}</span>
             </li>
             <li className="mb-4"><EditableInput title="Your Name" text={name ? name : 'What\'s your name?'} callback={(t) => handleBlur('name', t)} /></li>
             {/* <li className="mb-4"><EditableInput title="Your Age" text="How old are you?" /></li> */}

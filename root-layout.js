@@ -7,7 +7,32 @@ const initialState = {
   loggedIn: false,
   firstName: '',
   firebase: null,
-  user: null
+  user: null,
+  bol: [
+    ['Procter and Gamble', 'L\'Oreal', '7/1/2020', '100 cases'],
+    ['', '', '7/15/2020', '50 cases'],
+    ['', 'Head and Shoulders', '6/1/2020', '10 cases'],
+    ['', 'Dove', '5/1/2020', '100 cases'],
+    ['', '', '6/15/2020', '50 cases'],
+    ['', '', '6/30/2020', '50 cases']
+  ],
+  bolOrig: [
+    ['Procter and Gamble', 'L\'Oreal', '7/1/2020', '100 cases'],
+    ['', '', '7/15/2020', '50 cases'],
+    ['', 'Head and Shoulders', '6/1/2020', '10 cases'],
+    ['', 'Dove', '5/1/2020', '100 cases'],
+    ['', '', '6/15/2020', '50 cases'],
+    ['', '', '6/30/2020', '50 cases']
+  ]
+  // rows: {
+  //   0: ['Procter and Gamble', 'L\'Oreal', '7/1/2020', '100 cases'],
+  //   1: ['', '', '7/15/2020', '50 cases'],
+  //   2: ['', 'Head and Shoulders', '6/1/2020', '10 cases'],
+  //   3: ['', 'Dove', '5/1/2020', '100 cases'],
+  //   4: ['', '', '6/15/2020', '50 cases'],
+  //   5: ['', '', '6/30/2020', '50 cases']
+
+  // }
 }
 
 
@@ -26,6 +51,14 @@ function storeReducer(state, action) {
       return s
     case 'SET_FIREBASE':
       s.firebase = action.firebase
+      return s
+    case 'UPDATE_BOL':
+      // const t = []
+      // for(let i = 0; i < action.bol.length; i++) {
+      //   t.push(action.bol[i].slice(0))
+      // }
+      // console.log('newbol', t)
+      s.bol = action.bol.slice(0)
       return s
     default:
       return s
