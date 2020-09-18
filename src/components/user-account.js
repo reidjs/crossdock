@@ -42,7 +42,7 @@ const TruckCard = ({ type, deleteTruck, isCurrentTruck, setAsCurrentTruck }) => 
 
 
 
-const UserAccount = () => {
+const UserAccount = ({ hidePayments, hideGetStarted, hideLogout }) => {
   const [state, setState] = useState({ checkmark: false, age: '', trucks: [], userId: null, dbUser: null })
   const [name, setName] = useState('')
   const [dbUser, setDbUser] = useState(null)
@@ -187,14 +187,16 @@ const UserAccount = () => {
   })
   return (
     <div className={`bg-white p-4 flex flex-col items-center`}>
-      <h2 className="underline text-xl mb-4">Get Started Now</h2>
-      <div className="flex flex-col md:flex-row">
-        <span className="w-full md:w-1/2 mr-8">
-          <WarehouseStartButton />
-        </span>
-        <span className="w-full md:w-1/2">
-          <TruckerStartButton />
-        </span>
+      <div className={hideGetStarted ? 'hidden' : ''}>
+        <h2 className="underline text-xl mb-4">Get Started Now</h2>
+        <div className="flex flex-col md:flex-row">
+          <span className="w-full md:w-1/2 mr-8">
+            <WarehouseStartButton />
+          </span>
+          <span className="w-full md:w-1/2">
+            <TruckerStartButton />
+          </span>
+        </div>
       </div>
       {/* <Link to="/start"> <button className={`w-full p-6 bg-green-600 font-bold text-base md:text-2xl text-white`}>Find Docks &amp; Warehouses</button></Link> */}
 
@@ -214,12 +216,14 @@ const UserAccount = () => {
           </ul>
         </div>
       </form>
+      <div className={hidePayments ? 'hidden' : ''}>
       <h1 className={`text-4xl my-8`}>Payment Information</h1>
       {/* <form> */}
       <div className="container">
         <Elements stripe={promise}>
           <CheckoutForm />
         </Elements>
+      </div>
       </div>
       {/* </form> */}
       <h1 className={`text-4xl my-8`}>{`Your Truck${numTrucks > 1 ? 's' : ''} (${numTrucks})`}</h1>
@@ -235,7 +239,9 @@ const UserAccount = () => {
           <LoginButton text="Add new warehouse" />
         </form> */}
       <hr />
+      <div className={hideLogout ? 'hidden' : ''}>
       <LogoutButton onClick={logout} text="Log Out"></LogoutButton>
+      </div>
     </div>
   )
 }

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react"
-import { Link, navigate } from "gatsby"
-import useFirebase from '../useFirebase';
-import fb from 'firebase/app';
-import logout from '../logout'
+import React, { useEffect, useState, useContext } from "react"
+// import { Link, navigate } from "gatsby"
+// import useFirebase from '../useFirebase';
+// import fb from 'firebase/app';
+// import logout from '../logout'
 import Layout from "../components/layout"
-import Image from "../components/image"
+// import Image from "../components/image"
 import SEO from "../components/seo"
 import MapContainer from '../components/map'
 import EditableInput from '../components/editable-input'
@@ -12,12 +12,16 @@ import Spinner from '../components/spinner'
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../components/checkout-form";
-import { useLocation } from '@reach/router';
+import UserLogin from '../components/user-login';
+import UserAccount from '../components/user-account';
+// import { useLocation } from '@reach/router';
+import { StoreCtx } from '../store-ctx'
+
 // TODO: https://www.gatsbyjs.com/docs/gatsby-link/ programmatic navigation
 
-const COPY = ['1. Finding nearby warehouses that fit criteria', '2. Contacting nearby warehouses', '3. Negotiating best price with nearby warehouses', '4. Done!']
+const COPY = ['1. Finding nearby crossdocks that fit criteria', '2. Contacting nearby crossdocks', '3. Negotiating best price with nearby crossdocks', '4. Done!']
 
-const STEPS = ['1. Introduction', '2. Your Requirements', '3. Get Nearby Warehouses', '4. Pick Your Warehouse', '5. Billing Info', '6. Finished']
+const STEPS = ['1. Introduction', '2. Your Requirements', '3. Get Nearby Crossdocks', '4. Pick Your Crossdock', '5. Billing Info', '6. Finished']
 const promise = loadStripe("pk_test_TYooMQauvdEDq54NiTphI7jx");
 
 const FindWarehouse = () => {
@@ -29,32 +33,55 @@ const FindWarehouse = () => {
 
   const [step, setStep] = useState(0)
   const [searchCopy, setCopy] = useState(0)
-  const [showBillingInformation, changeBillingInformation] = useState(false)
+  // const [showBillingInformation, changeBillingInformation] = useState(false)
   // timer, not actually seconds, but time until next piece of copy is shown
   const [seconds, setSeconds] = useState(0)
   const [isActive, setIsActive] = useState(false)
+  // const bayLat = 37.8565659
+  // const bayLong = -122.29940159999998
+  const [markers, setMarkers] = useState([])
+  // const [position, setPosition] = useState([bayLat, bayLong]);
+  const [position, setPosition] = useState(null);
+  // const [cost, setCost] = useState('Up to $500')
+  const [user, changeUser] = useState(null)
 
-  function toggle() {
-    setIsActive(!isActive)
-  }
+  const store = useContext(StoreCtx)
+
+  // function toggle() {
+  //   setIsActive(!isActive)
+  // }
   function reset() {
     setCopy(0)
     setSeconds(0)
     clearInterval(interval)
   }
 
-  const [position, setPosition] = useState([51.505, -0.09]);
-  const [cost, setCost] = useState('Up to $500')
+  useEffect(() => {
+    if (store && store.user) {
+      changeUser(store.user)
+    } else {
+      changeUser(null)
+    }
+  }, [store])
+
+  
 
   if (typeof window !== 'undefined' && window.navigator) {
     function displayLocationInfo(position) {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
       setPosition([+lat, +lng])
+      const m = []
+      m.push([+lat + ((Math.random() - 0.5) / 10), +lng + ((Math.random() - 0.5) / 10)])
+      m.push([+lat + ((Math.random() - 0.5) / 10), +lng + ((Math.random() - 0.5) / 10)])
+      m.push([+lat + ((Math.random() - 0.5) / 10), +lng + ((Math.random() - 0.5) / 10)])
+      m.push([+lat + ((Math.random() - 0.5) / 10), +lng + ((Math.random() - 0.5) / 10)])
+      m.push([+lat + ((Math.random() - 0.5) / 10), +lng + ((Math.random() - 0.5) / 10)])
+      setMarkers(m)
 
       // console.log(`longitude: ${lng} | latitude: ${lat}`);
     }
-    if (window.navigator.geolocation) {
+    if (window.navigator.geolocation && !position && markers.length === 0) {
       window.navigator.geolocation.getCurrentPosition(displayLocationInfo);
     }
   }
@@ -85,7 +112,7 @@ const FindWarehouse = () => {
     // TODO: enable back/forward functionality
     // navigate(`?step=${val}`)
     if (val == 2) {
-      console.log('here')
+      // console.log('here')
       setIsActive(true)
     } else {
       setIsActive(false)
@@ -150,14 +177,24 @@ const FindWarehouse = () => {
         </div>
         <div className="w-full md:w-2/3 ">
           <div className={`my-0 mx-auto w-full flex`}>
-            <div className={`${step !== 1 ? `hidden` : ''} flex flex-col items-center w-full mt-4 p-16`}>
-              <h2 className={`text-2xl mb-4`}>Your Information</h2>
-              <EditableInput text="Where are you?" title="address" />
+            <div className={`${step !== 1 ? `hidden` : ''} flex flex-col items-left w-full mt-4 p-16`}>
+              {/* <h2 className={`text-2xl mb-4`}>Your Information</h2> */}
+              <details className={`${user ? 'hidden' : ''}`}>
+                <summary>Log In</summary>
+                <UserLogin />
+              </details>
+              <details className={`${user ? '' : 'hidden'}`}>
+                <summary>Your Account Information</summary>
+                <UserAccount hidePayments hideGetStarted hideLogout/>
+              </details>
+
+              {/* <EditableInput text="Where are you?" title="address" />
               <br />
-              <EditableInput text="What's your license plate #?" title="license #" />
+              <EditableInput text="What's your license plate #?" title="license #" /> */}
             </div>
             <div className={` ${step !== 1 ? `w-full md:w-full` : `hidden`} p-10`}>
-              <MapContainer center={position} />
+              <small>Simulated location data for demonstration purposes.</small>
+              <MapContainer markers={markers} center={position} />
             </div>
           </div>
           {/* <nav className={`px-8 justify-center`}> */}
@@ -166,7 +203,7 @@ const FindWarehouse = () => {
           {/* <div className="flex flex-col items-center w-full"> */}
           <div className={`${step !== 0 ? `hidden` : 'm-container'}`}>
             <div className={`p-8 container mb-32`}>
-              <h2 className={`text-2xl mb-4`}>CrossDock can help you find nearby warehouses to:</h2>
+              <h2 className={`text-2xl mb-4`}>Crossdocks are nearby warehouses, docks, and ports that can help you:</h2>
               <ul className={`list-disc ml-4`}>
                 <li className={``}>Fix freight that shifted during travel</li>
                 <li>Clean up your cargo bay</li>
@@ -177,8 +214,8 @@ const FindWarehouse = () => {
           </div>
           <div className={`${step !== 1 ? `hidden ` : 'm-container'}`}>
             <div className={`min-w-full p-4 mb-4`}>
-              <h2 className={`text-2xl`}>Warehouse Requirements</h2>
-              <small>Let the warehouse know what you need</small>
+              <h2 className={`text-2xl`}>Requirements</h2>
+              <small>Let the crossdock know what you need</small>
               <ul>
                 <li>
                   <details open>
@@ -240,7 +277,7 @@ const FindWarehouse = () => {
           </div>
           <div className={`${step !== 3 ? `hidden ` : `m-container `}`}>
             <div className={`flex flex-col container p-5 mb-4`}>
-              <h2 className={`text-2xl mb-4`}>We found these warehouses</h2>
+              <h2 className={`text-2xl mb-4`}>We found these crossdocks</h2>
               <ul>
                 <li className={`flex mb-4 flex-col md:flex-row`}>
                   <details className="mr-16 w-64">
@@ -249,6 +286,14 @@ const FindWarehouse = () => {
                     <p>Address: 99 Main Street, Albany CA 92323</p>
                   </details>
                   <button className="h-16 w-full md:w-64 flex items-center" onClick={nextStep}>ACCEPT ($344.00)</button>
+                </li>
+                <li className={`flex mb-4 flex-col md:flex-row`}>
+                  <details className="mr-16 w-64">
+                    <summary>Albany Warehouse Dock #11</summary>
+                    <p>Supervisor: Johnny Cash</p>
+                    <p>Address: 99 Main Street, Albany CA 92323</p>
+                  </details>
+                  <button className="h-16 w-full md:w-64 flex items-center" onClick={nextStep}>ACCEPT ($355.10)</button>
                 </li>
                 <li className={`flex flex-col md:flex-row`}>
                   <details className="mr-16 w-64 flex items-center">
@@ -277,7 +322,7 @@ const FindWarehouse = () => {
               </div>
             </div>
             <div className={`flex w-full flex-col md:flex-row`}>
-              <button onClick={() => changeStep(3)} className={`w-full p-6 bg-red-500  text-base md:text-2xl font-bold text-white`}>Back to warehouses</button>
+              <button onClick={() => changeStep(3)} className={`w-full p-6 bg-red-500  text-base md:text-2xl font-bold text-white`}>Back to list</button>
               <button onClick={nextStep} className={`w-full p-6 bg-green-500 font-bold text-base md:text-2xl text-white`}>Pay &amp; Get Directions</button>
             </div>
           </div>
