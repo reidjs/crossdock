@@ -14,7 +14,7 @@ const Contact = () => {
             <img className="rounded-full" src={reid} />
             <div className="text-center">
               <h1 className="font-bold">Reid Sherman</h1>
-              <small>Software Developer</small>
+              <h2 className="underline">Software Developer</h2>
               <ul>
                 <li>Web Application</li>
                 <li>Product Design</li>
@@ -26,7 +26,7 @@ const Contact = () => {
             <img className="rounded-full" src={steve} />
             <div className="text-center">
             <h1 className="font-bold">Stephen Schlecht</h1>
-            <small>Supply Chain Manager</small>
+            <h2 className="underline">Supply Chain Manager</h2>
             <ul>
               <li>Business Planning</li>
               <li>Operations</li>

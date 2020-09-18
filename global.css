@@ -15,6 +15,11 @@
     margin: 0 auto;
 }
 
+.leaflet-container {
+    height: 400px;
+    width: 100%;
+}
+
 form {
     /* width: 30vw; */
     width: 100%;

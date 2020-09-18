@@ -73,20 +73,6 @@ const WarehouseDashboard = () => {
   const [mediaType, setMediaType] = useState(0)
   const store = useContext(StoreCtx)
 
-  // const [rows, setRows] = useState(defaultRows)
-  // let rows = defaultRows
-
-  // function changeCell(row, col, newText, oldText) {
-  //   if (!rows) return
-  //   // console.log('idx, newText, oldText', row, col, newText, oldText)
-  //   const t = []
-  //   for(let i = 0; i < rows.length; i++) {
-  //     t.push(rows[i].slice(0))
-  //   }
-  //   t[row][col] = newText
-  //   console.log('t', t)
-  //   setRows(t)
-  // }
   const rows = [[]]
 
   const handleFileUpload = e => {
@@ -146,7 +132,7 @@ const WarehouseDashboard = () => {
             </li>
             <li className="block md:hidden mb-8">
               <button className="bg-orange-600 rounded-lg flex flex-col items-center" onClick={useFileUpload}>
-              <img src={gs1logo} className="w-32" />
+                <img src={gs1logo} className="w-32" />
                 Scan the GS1 BOL Barcode
                 </button>
               <div className={mediaType === 1 ? '' : 'hidden'}>
@@ -155,7 +141,7 @@ const WarehouseDashboard = () => {
                 <button className={`bg-green-500 ${uploadedImage ? '' : 'hidden'}`} onClick={nextStep}>Use Uploaded Picture</button>
               </div>
             </li>
-            
+
             <li className="mb-8"><button className={"bg-red-500"} onClick={nextStep}>Input BOL Manually</button ></li>
 
           </ul>

@@ -1,3 +1,8 @@
+- CPG challenge
+  out of stock
+
+  make titles bigger on 
+
 # CrossDock
 [Live Website (https://crossdock.me)](https://crossdock.me)
 
@@ -48,6 +53,7 @@ Leaflet and OpenStreetMaps
 - warehouse-dashboard
   - fix glitchy edit BOL table
   - back/forward button browser history
+  - remove react-webcam stuff
 
 - header
 - search

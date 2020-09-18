@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
-import './map.css'
+import 'leaflet/dist/leaflet.css'
+import L from 'leaflet'
+
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+});
+
 const MapContainer = (props) => {
   const [center, setCenter] = useState([0, 0])
 
@@ -21,7 +31,7 @@ const MapContainer = (props) => {
           />
           <Marker position={props.center}>
             <Popup>
-              Your approximate location <br /> <span onClick={() => console.log('hi')}>TODO: Make this an editable input?</span>
+              Marker <br /> <span onClick={() => console.log('hi')}></span>
           </Popup>
           </Marker>
         </Map>
