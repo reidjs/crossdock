@@ -188,7 +188,7 @@ const UserAccount = ({ hidePayments, hideGetStarted, hideLogout }) => {
   return (
     <div className={`bg-white p-4 flex flex-col items-center`}>
       <div className={hideGetStarted ? 'hidden' : ''}>
-        <h2 className="underline text-xl mb-4">Get Started Now</h2>
+        <h2 className="underline text-xl mb-4 text-center">Get Started Now</h2>
         <div className="flex flex-col md:flex-row">
           <span className="w-full md:w-1/2 mr-8">
             <WarehouseStartButton />
