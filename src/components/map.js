@@ -2,14 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
+if (L && L.Icon)
+  delete L.Icon.Default.prototype._getIconUrl;
 
-delete L.Icon.Default.prototype._getIconUrl;
-
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-  iconUrl: require('leaflet/dist/images/marker-icon.png'),
-  shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-});
+if (L && L.Icon && L.Icon.Default) {
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+  });
+}
 
 const MapContainer = (props) => {
   const [center, setCenter] = useState([0, 0])
@@ -26,17 +28,17 @@ const MapContainer = (props) => {
   const markers = props.markers.map((m, idx) => {
     // console.log('m', m)
     return (
-    <Marker key={idx} position={[m[0], m[1]]}>
-      <Popup>
-        Marker
+      <Marker key={idx} position={[m[0], m[1]]}>
+        <Popup>
+          Marker
       </Popup>
-    </Marker>
+      </Marker>
     )
   })
   return (
     <div className="z-10">
       {typeof window !== 'undefined' &&
-        <Map style={{ zIndex: '10' }} center={props.center} zoom={13}>
+        <Map style={{ zIndex: '10' }} center={props.center || center} zoom={9}>
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />

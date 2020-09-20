@@ -7,6 +7,7 @@ import { FancyButton } from '../components/fancy-button'
 import Svg from '../components/svg'
 import { StoreCtx } from '../store-ctx'
 // import { AnchorLink } from "gatsby-plugin-anchor-links";
+import logo from '../images/logo1.png'
 
 const Header = ({ siteTitle }) => {
   // const scrollTo = (id) => {
@@ -33,7 +34,8 @@ const Header = ({ siteTitle }) => {
               <h1>
                 <Link className={s.links} to="/">
                   <div className="flex flex-col items-center justify-center">
-                    <span className="text-2xl font-bold">{siteTitle}</span>
+                    {/* <span className="text-2xl font-bold">{siteTitle}</span> */}
+                    <span className="w-64"><img src={logo} /></span>
                     {/* <div className="flex justify-between nowrap w-full"><span role="img" aria-label="logo">✅</span><span role="img" aria-label="logo">🚚</span> <span role="img" aria-label="logo">🙅‍♂️ </span><span role="img" aria-label="logo">🚚 </span><span role="img" aria-label="logo">✅</span></div> */}
                   </div>
                 </Link>
