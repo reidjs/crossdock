@@ -17,14 +17,24 @@ When a freight shipment is refused by the customer, the entire load is usually r
 
 [Started September 5th, 2020](https://github.com/reidjs/crossdock/commit/6a3fa4a1b4d66fa3dd32a2a3086792e75e9fd3b3)
 
-## Target Customers
+## How it Works
 
 CrossDock connects people who ship products with warehouses and docks to resolve issues during transit with ad-hoc solutions.
 
 _Trucks Drivers and Dispatchers_
+The Shipper providers information about what service they need and their time requirements
+![InputInfo](./src/images/inputinfogif.gif)
 
+We route the shipper to a nearby crossdock to rework their load
+![FindCrossdock](./src/images/findwarehouse.gif)
 
 _Warehouse Workers and Managers_
+The warehouse worker scans the GS1 Bill of Lading barcode
+![Warehouse1](./src/images/barcodegif.gif)
+
+They then update the BOL inventory and send the updated data back to the shipper
+
+![Warehouse2](./src/images/updatebol.gif)
 <!-- ![foo](./src/images/blogimage2.jpg) Working GS-1 Barcode Reader -->
 
 
