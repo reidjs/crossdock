@@ -1,6 +1,8 @@
 # CrossDock
 [Live Website (https://crossdock.me)](https://crossdock.me)
 
+## ⭐ 2nd place winner in the GS1 Supply Chain Hackathon in 2020 ($9,000 Prize) ⭐
+
 ## About
 Steve and I built CrossDock over two weeks for the [GS-1 Flexible and Resilient: Future Proofing the Supply Chain Hackathon](https://gs1us-futureproofhack-platform.bemyapp.com/)
 
